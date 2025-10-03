@@ -1,20 +1,76 @@
-# Cortex XDR Data Sources Integration Guide
+# Cortex XDR/XSIAM Integration Guide
+## Production-Ready Syslog Generator for Cortex Platforms
 
-This guide shows how to leverage the comprehensive Cortex XDR data source research to enhance your syslog generator for better scenario coverage and realistic log simulation.
+### Overview
+This comprehensive guide provides everything needed to deploy the Cortex Syslog Generator in production environments with full Cortex XDR, XSIAM, and Prisma Cloud integration. The generator includes 22+ enterprise security vendors, 50+ MITRE ATT&CK techniques, and authentic Unit 42 threat research scenarios.
 
-## Overview
+### Key Features
+- **Enterprise Vendor Support**: 22+ security vendors with realistic log formats
+- **Unit 42 Integration**: Real threat intelligence from Palo Alto Networks research
+- **MITRE ATT&CK Mapping**: 50+ techniques across all tactics
+- **Multi-Vendor Correlation**: Automatic event correlation across security tools
+- **Cloud-Native Scenarios**: Container, serverless, and multi-cloud attack simulations
+- **Performance Optimized**: Multi-threading, batch processing, and streaming support
 
-Your existing cortex-syslog-generator now has access to:
+---
 
-1. **Comprehensive Data Source Reference** (`cortex_xdr_data_sources.md`) - Complete catalog of all Cortex XDR ingestion capabilities
-2. **Extended Vendor Generators** (`src/xgen/vendors/extended_vendors.py`) - Additional vendor-specific log generators
-3. **Enhanced TTP Coverage** - More realistic logs across all NICE categories
+## Table of Contents
+1. [Prerequisites](#prerequisites)
+2. [Installation & Setup](#installation--setup)
+3. [Cortex XDR Configuration](#cortex-xdr-configuration)
+4. [XSIAM Integration](#xsiam-integration) 
+5. [Production Scenarios](#production-scenarios)
+6. [Performance & Scaling](#performance--scaling)
+7. [Monitoring & Troubleshooting](#monitoring--troubleshooting)
+8. [Security & Compliance](#security--compliance)
 
-## Quick Integration Steps
+---
 
-### 1. Import Extended Vendors into Your App
+## Prerequisites
 
-Add to your existing `app.py`:
+### System Requirements
+- **Python**: 3.8+ with pip
+- **Operating System**: macOS, Linux, or Windows
+- **Memory**: Minimum 4GB RAM (8GB+ recommended for high-volume generation)
+- **Storage**: 10GB+ free space for logs and scenarios
+- **Network**: Access to Cortex XDR/XSIAM tenant
+
+### Cortex Platform Requirements
+- **Cortex XDR Pro/Enterprise**: Required for advanced correlation
+- **XSIAM**: Required for comprehensive SIEM capabilities
+- **AutoFocus**: Optional for threat intelligence integration
+- **Prisma Cloud**: Optional for cloud security scenarios
+
+### API Access
+```bash
+# Required API credentials
+CORTEX_XDR_API_KEY_ID="your_api_key_id"
+CORTEX_XDR_API_KEY="your_api_key"
+CORTEX_XDR_FQDN="your-tenant.xdr.paloaltonetworks.com"
+XSIAM_TENANT_URL="https://your-tenant.xsiam.paloaltonetworks.com"
+```
+
+---
+
+## Installation & Setup
+
+### 1. Quick Start Installation
+```bash
+# Clone repository
+git clone https://github.com/paloaltonetworks/cortex-syslog-generator.git
+cd cortex-syslog-generator
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Verify installation with demo
+python3 demo_enhanced_features.py
+
+# Run Unit 42 scenarios demo
+python3 demo_cortex_standalone.py
+```
+
+### 2. Configuration Setup
 
 ```python
 # Add this import alongside your existing vendor imports
