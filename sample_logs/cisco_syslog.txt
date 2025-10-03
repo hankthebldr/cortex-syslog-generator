@@ -1,0 +1,29 @@
+# CISCO_SYSLOG Sample Logs
+# Generated: 2025-10-02T22:46:58.572466
+# Count: 5
+
+# Log 1 - Cisco ASA - T1110.003
+# Timestamp: 2025-10-03 04:18:10.279578+00:00
+# Valid: False
+<131>Oct 03 03:46:58 cisco-asa-01 %ASA-3-109006: ASA event: Password Spraying
+
+# Log 2 - Cisco ASA - T1110.003
+# Timestamp: 2025-10-03 03:48:26.868490+00:00
+# Valid: False
+<131>Oct 03 03:46:58 cisco-asa-01 %ASA-3-109006: ASA event: Password Spraying
+
+# Log 3 - Cisco ASA - T1110.003
+# Timestamp: 2025-10-03 04:38:34.268536+00:00
+# Valid: False
+<131>Oct 03 03:46:58 cisco-asa-01 %ASA-3-109006: ASA event: Password Spraying
+
+# Log 4 - Cisco ASA - T1110.003
+# Timestamp: 2025-10-03 04:26:03.847976+00:00
+# Valid: False
+<131>Oct 03 03:46:58 cisco-asa-01 %ASA-3-109006: ASA event: Password Spraying
+
+# Log 5 - Cisco ASA - T1110.003
+# Timestamp: 2025-10-03 03:57:55.309441+00:00
+# Valid: False
+<131>Oct 03 03:46:58 cisco-asa-01 %ASA-3-109006: ASA event: Password Spraying
+

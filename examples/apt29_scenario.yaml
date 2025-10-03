@@ -1,0 +1,284 @@
+# APT29 (Cozy Bear) Scenario Configuration
+# This scenario demonstrates APT29's sophisticated cloud and enterprise techniques
+# with network heuristics designed to trigger analytics
+
+scenario:
+  name: "APT29 Cloud Persistence Campaign"
+  description: "Multi-stage APT29 campaign targeting cloud infrastructure with persistence mechanisms"
+  author: "XGEN Security Team"
+  version: "1.0"
+  
+  # APT29 typically covers these tactics in sequence
+  tactics_covered:
+    - "TA0001"  # Initial Access
+    - "TA0003"  # Persistence  
+    - "TA0004"  # Privilege Escalation
+    - "TA0005"  # Defense Evasion
+    - "TA0008"  # Lateral Movement
+
+  nice_categories:
+    - identity
+    - cloud
+    - network
+    - endpoint
+
+  estimated_duration_seconds: 7200  # 2 hours
+  
+  # APT29 campaign actors (realistic personas)
+  actors:
+    - user_id: "svc-backup"
+      username: "backup-service"
+      email: "backup@corp.local"
+      display_name: "Backup Service Account"
+      department: "IT Operations"
+      role: "Service Account"
+      identity_provider: "Azure AD"
+      auth_factors: ["certificate"]
+      is_privileged: true
+      
+    - user_id: "admin-john"
+      username: "jadmin"
+      email: "john.admin@corp.com"
+      display_name: "John Administrator"
+      department: "IT Security"
+      role: "Domain Admin"
+      identity_provider: "Active Directory"
+      auth_factors: ["password", "smartcard"]
+      is_privileged: true
+      
+  # Target infrastructure assets
+  assets:
+    - asset_id: "DC01"
+      hostname: "dc01.corp.local"
+      ip_address: "192.168.1.10"
+      asset_type: "domain_controller"
+      operating_system: "Windows Server 2019"
+      location: "Primary Datacenter"
+      subnet: "192.168.1.0/24"
+      zone: "internal"
+      tags:
+        criticality: "high"
+        owner: "IT"
+        
+    - asset_id: "WEB01"
+      hostname: "web01.corp.local"
+      ip_address: "192.168.2.50"
+      asset_type: "web_server"
+      operating_system: "Windows Server 2022"
+      location: "DMZ"
+      subnet: "192.168.2.0/24"
+      zone: "dmz"
+      
+    - asset_id: "WS-EXEC01"
+      hostname: "exec-laptop.corp.local"
+      ip_address: "192.168.1.100"
+      asset_type: "workstation"
+      operating_system: "Windows 11"
+      location: "Executive Floor"
+      subnet: "192.168.1.0/24"
+      zone: "internal"
+      tags:
+        criticality: "high"
+        owner: "Executive"
+
+  # Scenario timeline with APT29 TTP sequence
+  steps:
+    # Phase 1: Initial Access via compromised service account
+    - step_id: "initial_access"
+      name: "Compromise Service Account"
+      description: "APT29 gains initial access through compromised backup service account"
+      offset_seconds: 0
+      duration_seconds: 300
+      event_count: 8
+      vendors: ["Microsoft", "Azure"]
+      nice_categories: ["identity", "cloud"]
+      tactic_technique:
+        tactic_id: "TA0001"
+        tactic_name: "Initial Access"
+        technique_id: "T1078.004"
+        technique_name: "Valid Accounts: Cloud Accounts"
+        detection_notes: "Monitor for unusual cloud account activity from new locations"
+      
+    # Phase 2: Cloud Credential Persistence (T1098.001)
+    - step_id: "cloud_persistence_1"
+      name: "Create Additional Cloud Credentials"
+      description: "APT29 creates additional access keys and service principals for persistence"
+      offset_seconds: 600
+      duration_seconds: 1200
+      event_count: 5
+      vendors: ["Microsoft", "Azure"]
+      nice_categories: ["cloud", "identity"]
+      depends_on: ["initial_access"]
+      tactic_technique:
+        tactic_id: "TA0003"
+        tactic_name: "Persistence"
+        technique_id: "T1098.001"
+        technique_name: "Account Manipulation: Additional Cloud Credentials"
+        detection_notes: "Alert on new access key creation for existing accounts"
+        
+    # Phase 3: Windows Service Persistence (T1543.003)
+    - step_id: "service_persistence"
+      name: "Install Malicious Windows Service"
+      description: "APT29 installs persistent service on compromised domain controller"
+      offset_seconds: 1800
+      duration_seconds: 600
+      event_count: 12
+      vendors: ["Microsoft", "CrowdStrike"]
+      nice_categories: ["endpoint", "network"]
+      depends_on: ["cloud_persistence_1"]
+      tactic_technique:
+        tactic_id: "TA0003"
+        tactic_name: "Persistence"
+        technique_id: "T1543.003"
+        technique_name: "Create or Modify System Process: Windows Service"
+        detection_notes: "Monitor for sc.exe usage and new service installations"
+        
+    # Phase 4: Token Impersonation for Privilege Escalation (T1134.001)
+    - step_id: "token_impersonation"
+      name: "Token Impersonation Attack"
+      description: "APT29 uses token impersonation to escalate privileges"
+      offset_seconds: 2700
+      duration_seconds: 600
+      event_count: 8
+      vendors: ["Microsoft", "CrowdStrike", "SentinelOne"]
+      nice_categories: ["endpoint", "identity"]
+      depends_on: ["service_persistence"]
+      tactic_technique:
+        tactic_id: "TA0004"
+        tactic_name: "Privilege Escalation"
+        technique_id: "T1134.001"
+        technique_name: "Access Token Manipulation: Token Impersonation"
+        detection_notes: "Monitor for unusual LSASS access and token duplication"
+        
+    # Phase 5: SMB Lateral Movement (T1021.002)
+    - step_id: "smb_lateral_movement"
+      name: "SMB-based Lateral Movement"
+      description: "APT29 uses SMB to move laterally to additional systems"
+      offset_seconds: 4200
+      duration_seconds: 1200
+      event_count: 25
+      vendors: ["Microsoft", "Palo Alto Networks", "CrowdStrike"]
+      nice_categories: ["network", "endpoint"]
+      depends_on: ["token_impersonation"]
+      tactic_technique:
+        tactic_id: "TA0008"
+        tactic_name: "Lateral Movement"
+        technique_id: "T1021.002"
+        technique_name: "Remote Services: SMB/Windows Admin Shares"
+        detection_notes: "Alert on admin share access patterns and remote service creation"
+        
+    # Phase 6: Process Hollowing for Defense Evasion (T1055.001)
+    - step_id: "process_hollowing"
+      name: "Process Hollowing Evasion"
+      description: "APT29 uses process hollowing to evade detection"
+      offset_seconds: 6000
+      duration_seconds: 420
+      event_count: 10
+      vendors: ["Microsoft", "CrowdStrike", "SentinelOne"]
+      nice_categories: ["endpoint"]
+      depends_on: ["smb_lateral_movement"]
+      tactic_technique:
+        tactic_id: "TA0005"
+        tactic_name: "Defense Evasion"
+        technique_id: "T1055.001"
+        technique_name: "Process Injection: Process Hollowing"
+        detection_notes: "Monitor for process creation with suspended threads and memory modifications"
+
+# Generation Configuration
+generation:
+  # Output formats
+  formats: ["cef", "json"]
+  
+  # Transport destinations
+  transports:
+    - type: "syslog_udp"
+      host: "127.0.0.1"
+      port: 514
+      
+    - type: "xsiam_http"
+      endpoint: "${XSIAM_HTTP_ENDPOINT}"
+      api_key: "${XSIAM_API_KEY}"
+      api_key_id: "${XSIAM_API_KEY_ID}"
+      tenant_id: "${XSIAM_TENANT_ID}"
+      
+    - type: "webhook"
+      endpoint: "https://xsiam.corp.local/api/v1/logs"
+      headers:
+        "Authorization": "Bearer ${XSIAM_API_TOKEN}"
+        "Content-Type": "application/json"
+
+  # Event generation parameters
+  events_per_second: 5.0
+  total_events: null  # Determined by scenario steps
+  duration_seconds: 7200  # 2 hours
+  
+  # Randomization and noise
+  randomization_seed: 42  # For reproducible results
+  add_noise: true
+  noise_level: 0.15  # 15% background noise
+  
+  # Severity distribution (APT29 tends to be stealthier)
+  severity_distribution:
+    7: 0.4    # DEBUG - high for stealth
+    6: 0.35   # INFO
+    4: 0.15   # WARNING  
+    3: 0.08   # ERROR
+    2: 0.02   # CRITICAL
+
+# Analytics Configuration for Detection Validation
+analytics:
+  # Network heuristics to validate
+  network_patterns:
+    - pattern_name: "SMB Lateral Movement Burst"
+      description: "Detect rapid SMB connections to multiple targets"
+      min_events: 5
+      time_window_seconds: 300
+      port_signatures: [445, 139, 135]
+      detection_logic: |
+        | where dest_port in (445, 139, 135)
+        | where protocol="TCP"
+        | stats dc(dest_ip) as unique_targets by src_ip
+        | where unique_targets >= 3
+        
+    - pattern_name: "Service Creation Sequence"
+      description: "Detect service creation with network precursors"
+      min_events: 5
+      time_window_seconds: 600
+      sequence_pattern: ["smb_connect", "rpc_call", "service_create"]
+      detection_logic: |
+        | where (dest_port=445 AND action="connect") OR 
+                (dest_port=135 AND action="rpc_call") OR
+                (event_name="ServiceCreated")
+        | sort _time
+        | streamstats count by src_ip
+        | where count >= 3
+        
+    - pattern_name: "Cloud API Credential Manipulation"
+      description: "Detect cloud credential creation patterns"
+      min_events: 3
+      time_window_seconds: 1800
+      api_signatures: ["iam:CreateAccessKey", "iam:CreateUser", "iam:AttachUserPolicy"]
+      detection_logic: |
+        | where api_call in ("iam:CreateAccessKey", "iam:CreateUser", "iam:AttachUserPolicy")
+        | stats count by user_identity_type, api_call
+        | where count >= 2
+
+# Expected Detection Rules (for validation)
+expected_detections:
+  - rule_name: "APT29 Service Persistence"
+    description: "Detects APT29-style service persistence with network precursors"
+    mitre_techniques: ["T1543.003"]
+    expected_matches: 3
+    confidence_threshold: 0.8
+    
+  - rule_name: "Cloud Credential Manipulation"
+    description: "Detects additional cloud credential creation"
+    mitre_techniques: ["T1098.001"]
+    expected_matches: 2
+    confidence_threshold: 0.9
+    
+  - rule_name: "SMB Lateral Movement Campaign"
+    description: "Detects coordinated SMB-based lateral movement"
+    mitre_techniques: ["T1021.002"]
+    expected_matches: 5
+    confidence_threshold: 0.7

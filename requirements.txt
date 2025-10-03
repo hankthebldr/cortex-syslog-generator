@@ -1,0 +1,63 @@
+# Core Framework Dependencies
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+typer>=0.9.0
+click>=8.1.0
+rich>=13.0.0
+
+# Web Framework and API
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+flask>=2.3.0
+jinja2>=3.1.0
+
+# Data Generation and Faker
+faker>=19.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Network and Transport
+requests>=2.31.0
+httpx>=0.24.0
+aiohttp>=3.8.0
+
+# Serialization and Configuration
+pyyaml>=6.0
+toml>=0.10.2
+orjson>=3.9.0
+
+# Logging and Monitoring
+structlog>=23.0.0
+prometheus-client>=0.17.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.11.0
+httpx-test>=0.1.0
+responses>=0.23.0
+
+# Type Checking and Linting
+mypy>=1.5.0
+ruff>=0.0.280
+
+# Template Engine
+jinja2>=3.1.0
+
+# Async Support
+asyncio-mqtt>=0.13.0
+aio-pika>=9.2.0  # For AMQP if needed
+
+# Crypto and Security
+cryptography>=41.0.0
+
+# Time and Date Utilities
+python-dateutil>=2.8.0
+pytz>=2023.3
+
+# Plugin Architecture
+pluggy>=1.2.0
+
+# Development Tools
+pre-commit>=3.3.0
+black>=23.7.0

@@ -1,0 +1,68 @@
+{
+  "panos_cef": {
+    "total_logs": 5,
+    "valid_logs": 5,
+    "vendors": [
+      "Palo Alto Networks"
+    ],
+    "formats": [
+      "cef"
+    ],
+    "ttps": [
+      "T1566.001"
+    ],
+    "issues": []
+  },
+  "crowdstrike_json": {
+    "total_logs": 5,
+    "valid_logs": 0,
+    "vendors": [
+      "CrowdStrike"
+    ],
+    "formats": [
+      "json"
+    ],
+    "ttps": [
+      "T1059.001"
+    ],
+    "issues": [
+      "Log not mappable to XDM schema",
+      "Required fields missing or invalid",
+      "Log doesn't match identification patterns for CrowdStrike"
+    ]
+  },
+  "cisco_syslog": {
+    "total_logs": 5,
+    "valid_logs": 0,
+    "vendors": [
+      "Cisco ASA"
+    ],
+    "formats": [
+      "syslog"
+    ],
+    "ttps": [
+      "T1110.003"
+    ],
+    "issues": [
+      "Log not mappable to XDM schema"
+    ]
+  },
+  "okta_json": {
+    "total_logs": 5,
+    "valid_logs": 0,
+    "vendors": [
+      "Okta"
+    ],
+    "formats": [
+      "json"
+    ],
+    "ttps": [
+      "T1078.004"
+    ],
+    "issues": [
+      "Log not mappable to XDM schema",
+      "Required fields missing or invalid",
+      "Log doesn't match identification patterns for Okta"
+    ]
+  }
+}

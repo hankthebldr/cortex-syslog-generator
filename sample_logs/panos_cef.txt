@@ -1,0 +1,29 @@
+# PANOS_CEF Sample Logs
+# Generated: 2025-10-02T22:46:58.572300
+# Count: 5
+
+# Log 1 - Palo Alto Networks - T1566.001
+# Timestamp: 2025-10-03 04:38:06.596884+00:00
+# Valid: True
+<131>Oct 03 03:46:58 panos-fw-01 CEF:0|Palo Alto Networks|PAN-OS|1.0|8894|Threat|3|src=10.29.193.171 dst=203.44.194.71 spt=1560 dpt=25 proto=TCP act=alert app=web-browsing msg=Threat detected: malicious-email-attachment.exe - Spearphishing Attachment rt=1759466286596
+
+# Log 2 - Palo Alto Networks - T1566.001
+# Timestamp: 2025-10-03 04:45:43.545794+00:00
+# Valid: True
+<131>Oct 03 03:46:58 panos-fw-01 CEF:0|Palo Alto Networks|PAN-OS|1.0|5797|Threat|3|src=10.39.53.133 dst=203.2.180.254 spt=11079 dpt=25 proto=TCP act=alert app=web-browsing msg=Threat detected: malicious-email-attachment.exe - Spearphishing Attachment rt=1759466743545
+
+# Log 3 - Palo Alto Networks - T1566.001
+# Timestamp: 2025-10-03 04:02:46.471870+00:00
+# Valid: True
+<131>Oct 03 03:46:58 panos-fw-01 CEF:0|Palo Alto Networks|PAN-OS|1.0|5115|Threat|3|src=10.33.233.235 dst=203.160.126.53 spt=5755 dpt=80 proto=TCP act=alert app=web-browsing msg=Threat detected: malicious-email-attachment.exe - Spearphishing Attachment rt=1759464166471
+
+# Log 4 - Palo Alto Networks - T1566.001
+# Timestamp: 2025-10-03 04:20:26.331501+00:00
+# Valid: True
+<131>Oct 03 03:46:58 panos-fw-01 CEF:0|Palo Alto Networks|PAN-OS|1.0|3375|Threat|3|src=10.122.188.147 dst=203.206.222.231 spt=51387 dpt=25 proto=TCP act=alert app=web-browsing msg=Threat detected: malicious-email-attachment.exe - Spearphishing Attachment rt=1759465226331
+
+# Log 5 - Palo Alto Networks - T1566.001
+# Timestamp: 2025-10-03 04:25:15.567248+00:00
+# Valid: True
+<131>Oct 03 03:46:58 panos-fw-01 CEF:0|Palo Alto Networks|PAN-OS|1.0|2667|Threat|3|src=10.192.241.164 dst=203.74.20.249 spt=55117 dpt=25 proto=TCP act=alert app=web-browsing msg=Threat detected: malicious-email-attachment.exe - Spearphishing Attachment rt=1759465515567
+

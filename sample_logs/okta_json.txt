@@ -1,0 +1,29 @@
+# OKTA_JSON Sample Logs
+# Generated: 2025-10-02T22:46:58.572532
+# Count: 5
+
+# Log 1 - Okta - T1078.004
+# Timestamp: 2025-10-03 03:48:30.346572+00:00
+# Valid: False
+{"_time":"2025-10-03T03:46:58.572020+00:00","_vendor":"Okta","_product":"Unknown","_event_type":"generic","_severity":"WARN","_raw_log":"","xdm":{"event":{"timestamp":"2025-10-03T03:48:30.346572+00:00"}}}
+
+# Log 2 - Okta - T1078.004
+# Timestamp: 2025-10-03 04:27:44.791074+00:00
+# Valid: False
+{"_time":"2025-10-03T03:46:58.572059+00:00","_vendor":"Okta","_product":"Unknown","_event_type":"generic","_severity":"WARN","_raw_log":"","xdm":{"event":{"timestamp":"2025-10-03T04:27:44.791074+00:00"}}}
+
+# Log 3 - Okta - T1078.004
+# Timestamp: 2025-10-03 04:34:42.322117+00:00
+# Valid: False
+{"_time":"2025-10-03T03:46:58.572093+00:00","_vendor":"Okta","_product":"Unknown","_event_type":"generic","_severity":"WARN","_raw_log":"","xdm":{"event":{"timestamp":"2025-10-03T04:34:42.322117+00:00"}}}
+
+# Log 4 - Okta - T1078.004
+# Timestamp: 2025-10-03 04:34:12.908614+00:00
+# Valid: False
+{"_time":"2025-10-03T03:46:58.572126+00:00","_vendor":"Okta","_product":"Unknown","_event_type":"generic","_severity":"WARN","_raw_log":"","xdm":{"event":{"timestamp":"2025-10-03T04:34:12.908614+00:00"}}}
+
+# Log 5 - Okta - T1078.004
+# Timestamp: 2025-10-03 04:36:52.713512+00:00
+# Valid: False
+{"_time":"2025-10-03T03:46:58.572159+00:00","_vendor":"Okta","_product":"Unknown","_event_type":"generic","_severity":"WARN","_raw_log":"","xdm":{"event":{"timestamp":"2025-10-03T04:36:52.713512+00:00"}}}
+
