@@ -70,11 +70,8 @@ session_lock = threading.Lock()
 # Define a list of departments for the user base
 
 DEPARTMENTS = [
-
-    "Engineering", "Marketing", "Sales", "Human Resources",
-
-    "Finance", "IT Support", "Customer Service", "Product Management"
-
+    "Engineering", "Marketing", "Sales", "Human Resources",
+    "Finance", "IT Support", "Customer Service", "Product Management"
 ]
 
   
@@ -749,7 +746,7 @@ HTML = '''
 
         "Cisco": ["ASA"],
 
-        "Zscaler": ["Web Proxy"],
+        "Zscaler": ["Web Proxy", "NSS Firewall", "ZPA User Activity", "ZPA User Status", "ZPA Connector", "ZPA Audit"],
 
         "Proofpoint": ["Email Security"],
 
@@ -1480,10 +1477,269 @@ def gen_cisco_asa_log(fmt='cef', **kwargs):
 
   
 
+def gen_zscaler_web_log(fmt='cef', **kwargs):
+    """Generate authentic Zscaler NSS Web log in CEF format."""
+    now = datetime.now()
+    username = kwargs.get('username', fake.user_name())
+    client_ip = kwargs.get('src_ip', fake.ipv4_private())
+    server_ip = kwargs.get('dst_ip', fake.ipv4_public())
+    host = kwargs.get('ehost', fake.domain_name())
+    url = kwargs.get('eurl', f"https://{host}/path/to/resource")
+    
+    # Realistic Zscaler web log data
+    actions = ['Allowed', 'Blocked', 'Monitored']
+    action = kwargs.get('action', random.choice(actions))
+    reasons = ['Acceptable Use Policy', 'Security Policy', 'Bandwidth Control', 'Content Filtering']
+    reason = kwargs.get('reason', random.choice(reasons))
+    url_categories = ['Business Use', 'Social Networking', 'Malware', 'Phishing', 'Adult Content']
+    url_cat = kwargs.get('urlcat', random.choice(url_categories))
+    
+    # Generate authentic Zscaler NSS Web log format
+    log_line = (f"{now.strftime('%b %d %H:%M:%S')} zscaler-nss "
+                f"CEF:0|Zscaler|NSSWeblog|5.0|{action}|{reason}|3|"
+                f"act={action} app=HTTP cat={url_cat} dhost={host} dst={server_ip} "
+                f"src={client_ip} in={random.randint(1024, 65536)} outcome={random.randint(200, 404)} "
+                f"out={random.randint(512, 8192)} request={url} "
+                f"rt={now.strftime('%b %d %y %H:%M:%S')} "
+                f"sourceTranslatedAddress={fake.ipv4_private()} "
+                f"requestClientApplication=Mozilla/5.0 requestMethod=GET suser={username} "
+                f"spriv={fake.city()} externalId={random.randint(100000, 999999)} "
+                f"fileType=html reason={reason} destinationServiceName=WebService "
+                f"cn1={random.randint(1, 100)} cn1Label=riskscore "
+                f"cs1={random.choice(DEPARTMENTS)} cs1Label=dept "
+                f"cs2=General_Browsing cs2Label=urlsupercat "
+                f"cs3=Web_Browser cs3Label=appclass "
+                f"cs4=None cs4Label=malwarecat "
+                f"cs5=None cs5Label=threatname "
+                f"cs6=None cs6Label=dlpeng "
+                f"ZscalerNSSWeblogURLClass=Acceptable "
+                f"ZscalerNSSWeblogDLPDictionaries=None "
+                f"requestContext= contenttype=text/html "
+                f"unscannabletype=None deviceowner={username} "
+                f"devicehostname={fake.hostname()}")
+    
+    return {
+        'timestamp': now.isoformat(), 'vendor': 'Zscaler', 'product': 'NSSWeblog', 
+        'severity': 3, 'event_id': 4001, 'name': action,
+        'username': username, 'src_ip': client_ip, 'dst_ip': server_ip,
+        'message': f'{action}: {url} - {reason}', 'log_line': log_line
+    }
+
+def gen_zscaler_firewall_log(fmt='cef', **kwargs):
+    """Generate authentic Zscaler NSS Firewall log in CEF format."""
+    now = datetime.now()
+    username = kwargs.get('username', fake.user_name())
+    client_ip = kwargs.get('src_ip', fake.ipv4_private())
+    server_ip = kwargs.get('dst_ip', fake.ipv4_public())
+    
+    # Realistic firewall log data
+    actions = ['Allow', 'Drop', 'Reset']
+    action = kwargs.get('action', random.choice(actions))
+    protocols = ['TCP', 'UDP', 'ICMP']
+    proto = kwargs.get('ipproto', random.choice(protocols))
+    src_port = kwargs.get('csport', random.randint(1024, 65535))
+    dst_port = kwargs.get('cdport', random.choice([80, 443, 22, 25, 53, 3389]))
+    
+    rule_labels = ['Corporate_Internet_Access', 'Block_P2P', 'Allow_HTTPS', 'Block_Malware']
+    rule_label = kwargs.get('rulelabel', random.choice(rule_labels))
+    
+    # Generate authentic Zscaler NSS Firewall log format
+    log_line = (f"{now.strftime('%b %d %H:%M:%S')} zscaler-nss-fw "
+                f"CEF:0|Zscaler|NSSFWlog|5.7|{action}|{rule_label}|3|"
+                f"act={action} suser={username} src={client_ip} spt={src_port} "
+                f"dst={server_ip} dpt={dst_port} "
+                f"deviceTranslatedAddress={fake.ipv4_private()} "
+                f"deviceTranslatedPort={random.randint(1024, 65535)} "
+                f"destinationTranslatedAddress={server_ip} "
+                f"destinationTranslatedPort={dst_port} "
+                f"sourceTranslatedAddress={client_ip} "
+                f"sourceTranslatedPort={src_port} "
+                f"proto={proto} tunnelType=IPSEC dnat=No stateful=Yes "
+                f"spriv={fake.city()} reason={rule_label} "
+                f"in={random.randint(1024, 1048576)} out={random.randint(512, 524288)} "
+                f"rt={now.strftime('%b %d %H:%M:%S')} deviceDirection=1 "
+                f"cs1={random.choice(DEPARTMENTS)} cs1Label=dept "
+                f"cs2=InternetAccess cs2Label=nwService "
+                f"cs3=WebBrowsing cs3Label=nwApp "
+                f"cs4=No cs4Label=aggregated "
+                f"cs6=None cs6label=threatname "
+                f"cn1={random.randint(100, 30000)} cn1Label=durationms "
+                f"cn2=1 cn2Label=numsessions "
+                f"cs5Label=ipCat cs5=Acceptable "
+                f"cat=None destCountry={fake.country_code()} "
+                f"avgduration={random.randint(1000, 10000)}")
+    
+    return {
+        'timestamp': now.isoformat(), 'vendor': 'Zscaler', 'product': 'NSSFWlog', 
+        'severity': 3, 'event_id': 4002, 'name': action,
+        'username': username, 'src_ip': client_ip, 'dst_ip': server_ip,
+        'message': f'{action}: {client_ip}:{src_port} -> {server_ip}:{dst_port} ({proto})', 'log_line': log_line
+    }
+
+def gen_zscaler_zpa_user_activity_log(fmt='leef', **kwargs):
+    """Generate authentic Zscaler ZPA User Activity log in LEEF format."""
+    now = datetime.now()
+    username = kwargs.get('username', fake.user_name())
+    client_public_ip = kwargs.get('src_ip', fake.ipv4_public())
+    client_private_ip = kwargs.get('srcPreNAT', fake.ipv4_private())
+    server_ip = kwargs.get('dst_ip', fake.ipv4_private())
+    
+    # ZPA specific data
+    connection_statuses = ['ACTIVE', 'CLOSED', 'TIMEOUT']
+    connection_status = kwargs.get('ConnectionStatus', random.choice(connection_statuses))
+    internal_reasons = ['OK', 'USER_INITIATED', 'POLICY_TIMEOUT', 'NETWORK_ERROR']
+    internal_reason = kwargs.get('InternalReason', random.choice(internal_reasons))
+    
+    session_id = kwargs.get('SessionID', fake.uuid4())
+    connection_id = kwargs.get('ConnectionID', fake.uuid4())
+    customer = kwargs.get('Customer', 'Corp_Customer_001')
+    
+    # Generate authentic ZPA User Activity log in LEEF format
+    log_line = (f"LEEF:1.0|Zscaler|ZPA|4.1|{connection_status}{internal_reason}|"
+                f"cat=ZPA User Activity\tdevTime={int(now.timestamp())}"
+                f"\tCustomer={customer}\tSessionID={session_id}"
+                f"\tConnectionID={connection_id}\tInternalReason={internal_reason}"
+                f"\tConnectionStatus={connection_status}\tproto=6"
+                f"\tDoubleEncryption=1\tusrName={username}"
+                f"\tdstPort={random.choice([80, 443, 22, 3389])}\tsrc={client_public_ip}"
+                f"\tsrcPreNAT={client_private_ip}"
+                f"\tClientLatitude={fake.latitude()}\tClientLongitude={fake.longitude()}"
+                f"\tClientCountryCode={fake.country_code()}\tClientZEN=ZEN_{fake.city()}"
+                f"\tpolicy=Corp_Access_Policy\tConnector={fake.hostname()}-connector"
+                f"\tConnectorZEN=ZEN_{fake.city()}\tConnectorIP={fake.ipv4_private()}"
+                f"\tConnectorPort={random.randint(1024, 65535)}"
+                f"\tApplicationName={fake.domain_name()}\tApplicationSegment=Corp_App_Segment"
+                f"\tAppGroup=Production_Apps\tServer={fake.hostname()}"
+                f"\tdst={server_ip}\tServerPort={random.choice([80, 443, 22])}"
+                f"\tPolicyProcessingTime={random.randint(10, 100)}"
+                f"\tServerSetupTime={random.randint(50, 500)}"
+                f"\tTimestampConnectionStart:iso8601={now.isoformat()}"
+                f"\tTimestampConnectionEnd:iso8601={now.isoformat()}"
+                f"\tZENTotalBytesRxClient={random.randint(1024, 1048576)}"
+                f"\tZENTotalBytesTxClient={random.randint(512, 524288)}"
+                f"\tIdp=ActiveDirectory")
+    
+    return {
+        'timestamp': now.isoformat(), 'vendor': 'Zscaler', 'product': 'ZPA', 
+        'severity': 6, 'event_id': 4003, 'name': f'UserActivity_{connection_status}',
+        'username': username, 'src_ip': client_public_ip, 'dst_ip': server_ip,
+        'message': f'ZPA User Activity: {username} - {connection_status}', 'log_line': log_line
+    }
+
+def gen_zscaler_zpa_user_status_log(fmt='leef', **kwargs):
+    """Generate authentic Zscaler ZPA User Status log in LEEF format."""
+    now = datetime.now()
+    username = kwargs.get('username', fake.user_name())
+    public_ip = kwargs.get('src_ip', fake.ipv4_public())
+    private_ip = kwargs.get('srcPreNAT', fake.ipv4_private())
+    
+    session_statuses = ['AUTHENTICATED', 'UNAUTHENTICATED', 'EXPIRED']
+    session_status = kwargs.get('SessionStatus', random.choice(session_statuses))
+    session_id = kwargs.get('SessionID', fake.uuid4())
+    customer = kwargs.get('Customer', 'Corp_Customer_001')
+    
+    # Generate authentic ZPA User Status log in LEEF format  
+    log_line = (f"LEEF:1.0|Zscaler|ZPA|4.1|{session_status}|cat=ZPA User Status"
+                f"\tdevTime={int(now.timestamp())}\tCustomer={customer}"
+                f"\tusrName={username}\tSessionID={session_id}"
+                f"\tSessionStatus={session_status}\tVersion=22.41.1"
+                f"\tZEN=ZEN_{fake.city()}\tCertificateCN={username}@corp.com"
+                f"\tsrcPreNAT={private_ip}\tsrc={public_ip}"
+                f"\tLatitude={fake.latitude()}\tLongitude={fake.longitude()}"
+                f"\tCountryCode={fake.country_code()}"
+                f"\tTimestampAuthentication:iso8601={now.isoformat()}"
+                f"\tdstBytes={random.randint(1024, 1048576)}"
+                f"\tsrcBytes={random.randint(512, 524288)}\tIdp=ActiveDirectory"
+                f"\tidentHostName={fake.hostname()}\tPlatform=Windows"
+                f"\tClientType=ZPA_CLIENT")
+    
+    return {
+        'timestamp': now.isoformat(), 'vendor': 'Zscaler', 'product': 'ZPA', 
+        'severity': 6, 'event_id': 4004, 'name': f'UserStatus_{session_status}',
+        'username': username, 'src_ip': public_ip, 'dst_ip': 'N/A',
+        'message': f'ZPA User Status: {username} - {session_status}', 'log_line': log_line
+    }
+
+def gen_zscaler_zpa_connector_log(fmt='leef', **kwargs):
+    """Generate authentic Zscaler ZPA App Connector log in LEEF format."""
+    now = datetime.now()
+    public_ip = kwargs.get('src_ip', fake.ipv4_public())
+    private_ip = kwargs.get('srcPreNAT', fake.ipv4_private())
+    
+    session_statuses = ['CONNECTED', 'DISCONNECTED', 'AUTHENTICATED']
+    session_status = kwargs.get('SessionStatus', random.choice(session_statuses))
+    session_id = kwargs.get('SessionID', fake.uuid4())
+    customer = kwargs.get('Customer', 'Corp_Customer_001')
+    connector_name = f"{fake.hostname()}-connector"
+    
+    # Generate authentic ZPA App Connector log in LEEF format
+    log_line = (f"LEEF:1.0|Zscaler|ZPA|4.1|{session_status}|cat=Connector Status"
+                f"\tdevTime={int(now.timestamp())}\tCustomer={customer}"
+                f"\tSessionID={session_id}\tSessionType=CONNECTOR"
+                f"\tVersion=22.41.1\tPlatform=Linux\tZEN=ZEN_{fake.city()}"
+                f"\tConnector={connector_name}\tConnectorGroup=Production_Connectors"
+                f"\tsrcPreNAT={private_ip}\tsrc={public_ip}"
+                f"\tLatitude={fake.latitude()}\tLongitude={fake.longitude()}"
+                f"\tCountryCode={fake.country_code()}"
+                f"\tTimestampAuthentication:iso8601={now.isoformat()}"
+                f"\tCPUUtilization={random.randint(10, 80)}"
+                f"\tMemUtilization={random.randint(20, 70)}"
+                f"\tServiceCount={random.randint(5, 25)}"
+                f"\tInterfaceDefRoute=eth0\tDefRouteGW={fake.ipv4_private()}"
+                f"\tPrimaryDNSResolver={fake.ipv4_private()}"
+                f"\tNumOfInterfaces=2\tTotalBytesRx={random.randint(1048576, 10485760)}"
+                f"\tTotalBytesTx={random.randint(524288, 5242880)}")
+    
+    return {
+        'timestamp': now.isoformat(), 'vendor': 'Zscaler', 'product': 'ZPA', 
+        'severity': 6, 'event_id': 4005, 'name': f'ConnectorStatus_{session_status}',
+        'username': 'N/A', 'src_ip': public_ip, 'dst_ip': 'N/A',
+        'message': f'ZPA Connector Status: {connector_name} - {session_status}', 'log_line': log_line
+    }
+
+def gen_zscaler_zpa_audit_log(fmt='leef', **kwargs):
+    """Generate authentic Zscaler ZPA Audit log in LEEF format."""
+    now = datetime.now()
+    username = kwargs.get('username', fake.user_name())
+    
+    # ZPA audit operations
+    audit_operations = ['CREATE', 'UPDATE', 'DELETE', 'READ']
+    operation = kwargs.get('auditOperationType', random.choice(audit_operations))
+    
+    object_types = ['APPLICATION_SEGMENT', 'ACCESS_POLICY', 'CONNECTOR', 'USER']
+    object_type = kwargs.get('objectType', random.choice(object_types))
+    object_name = kwargs.get('objectName', f'{object_type.lower()}_001')
+    
+    request_id = kwargs.get('requestId', fake.uuid4())
+    session_id = kwargs.get('sessionId', fake.uuid4())
+    customer_id = kwargs.get('customerId', random.randint(100000, 999999))
+    
+    # Generate authentic ZPA Audit log in LEEF format
+    log_line = (f"LEEF:1.0|Zscaler|ZPA|4.1|{operation}|cat=ZPA_Audit_Log\t"
+                f"devTime={int(now.timestamp())}\t"
+                f"creationTime={now.isoformat()}\t"
+                f"requestId={request_id}\t"
+                f"sessionId={session_id}\t"
+                f"auditOldValue=\t"
+                f"auditNewValue=\t"
+                f"auditOperationType={operation}\t"
+                f"objectType={object_type}\t"
+                f"objectName={object_name}\t"
+                f"objectId={random.randint(1000, 9999)}\t"
+                f"accountName={customer_id}\t"
+                f"usrName={username}")
+    
+    return {
+        'timestamp': now.isoformat(), 'vendor': 'Zscaler', 'product': 'ZPA_Audit', 
+        'severity': 6, 'event_id': 4006, 'name': f'Audit_{operation}',
+        'username': username, 'src_ip': 'N/A', 'dst_ip': 'N/A',
+        'message': f'ZPA Audit: {operation} {object_type} {object_name}', 'log_line': log_line
+    }
+
+# Legacy function for backward compatibility
 def gen_zscaler_log(fmt='cef', **kwargs):
-
-    message_dict = {'name': 'Blocked Malicious URL', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'dst_ip': random.choice(KNOWN_BAD_IPS), 'message': 'URL blocked due to security policy'}
-
+    """Legacy Zscaler log generator - delegates to Web Proxy for backward compatibility."""
+    return gen_zscaler_web_log(fmt=fmt, **kwargs)
     message_dict.update(kwargs)
 
     return format_log_line("Zscaler", "Web Proxy", 8, 4000, message_dict, fmt)
@@ -2030,13 +2286,15 @@ def add_story_noise(config, sock, csv_writer):
 
     dest_port = int(config.get('dest_port', 514))
 
-    noise_generators = [
+    noise_generators = [
 
-        gen_azure_flow_log, gen_gcp_flow_log, gen_duo_log, gen_okta_sso_log,
+        gen_azure_flow_log, gen_gcp_flow_log, gen_duo_log, gen_okta_sso_log,
 
-        gen_panos_log, gen_google_workspace_auth_log, gen_windows_event_collector_log
+        gen_panos_log, gen_google_workspace_auth_log, gen_windows_event_collector_log,
 
-    ]
+        gen_zscaler_web_log, gen_zscaler_firewall_log, gen_zscaler_zpa_user_status_log
+
+    ]
 
     for _ in range(random.randint(50, 100)):
 
@@ -2163,7 +2421,10 @@ def run_randomization_session(config, sock, csv_writer):
 
         "Microsoft 365-Email Logs": gen_m365_email_log, "Palo Alto Networks-PAN-OS": gen_panos_log, "Cisco-ASA": gen_cisco_asa_log,
 
-        "Zscaler-Web Proxy": gen_zscaler_log, "Proofpoint-Email Security": gen_proofpoint_log,
+        "Zscaler-Web Proxy": gen_zscaler_web_log, "Zscaler-NSS Firewall": gen_zscaler_firewall_log,
+        "Zscaler-ZPA User Activity": gen_zscaler_zpa_user_activity_log, "Zscaler-ZPA User Status": gen_zscaler_zpa_user_status_log,
+        "Zscaler-ZPA Connector": gen_zscaler_zpa_connector_log, "Zscaler-ZPA Audit": gen_zscaler_zpa_audit_log,
+        "Proofpoint-Email Security": gen_proofpoint_log,
 
         "Microsoft-Defender for Endpoint": gen_mde_log, "CrowdStrike-Falcon": gen_crowdstrike_log,
 
