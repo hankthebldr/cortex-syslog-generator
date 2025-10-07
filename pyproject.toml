@@ -1,0 +1,243 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cortex-syslog-generator"
+version = "2.1.0"
+description = "Enterprise Security Log Generator and Analytics Simulator for Cortex XSIAM"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Palo Alto Networks", email = "support@paloaltonetworks.com"}
+]
+maintainers = [
+    {name = "Henry Reed", email = "henry@henryreed.ai"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Logging",
+    "Topic :: System :: Monitoring",
+]
+keywords = ["security", "logging", "syslog", "cortex", "xsiam", "mitre", "attack", "simulation"]
+requires-python = ">=3.9"
+
+dependencies = [
+    # Core Framework
+    "pydantic>=2.0.0,<3.0",
+    "pydantic-settings>=2.0.0,<3.0",
+    "typer>=0.9.0,<1.0",
+    "click>=8.1.0,<9.0",
+    "rich>=13.0.0,<14.0",
+    
+    # Web Framework
+    "fastapi>=0.100.0,<1.0",
+    "uvicorn[standard]>=0.20.0,<1.0",
+    "flask>=2.3.0,<4.0",
+    "jinja2>=3.1.0,<4.0",
+    
+    # Data Generation
+    "faker>=19.0.0,<21.0",
+    "numpy>=1.24.0,<2.0",
+    "pandas>=2.0.0,<3.0",
+    
+    # Network and Transport
+    "requests>=2.31.0,<3.0",
+    "httpx>=0.24.0,<1.0",
+    "aiohttp>=3.8.0,<4.0",
+    
+    # Serialization
+    "pyyaml>=6.0,<7.0",
+    "orjson>=3.9.0,<4.0",
+    
+    # Logging and Monitoring
+    "structlog>=23.0.0,<24.0",
+    "prometheus-client>=0.17.0,<1.0",
+    
+    # Time and Date
+    "python-dateutil>=2.8.0,<3.0",
+    "pytz>=2023.3,<2025.0",
+    
+    # Security
+    "cryptography>=41.0.0,<42.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    # Testing
+    "pytest>=7.4.0,<8.0",
+    "pytest-asyncio>=0.21.0,<1.0",
+    "pytest-mock>=3.11.0,<4.0",
+    "pytest-cov>=4.1.0,<5.0",
+    "httpx-test>=0.1.0,<1.0",
+    "responses>=0.23.0,<1.0",
+    
+    # Type Checking and Linting
+    "mypy>=1.5.0,<2.0",
+    "ruff>=0.1.0,<1.0",
+    "black>=23.7.0,<24.0",
+    
+    # Development Tools
+    "pre-commit>=3.3.0,<4.0",
+    "bandit[toml]>=1.7.5,<2.0",
+]
+
+docker = [
+    "gunicorn>=21.0.0,<22.0",
+]
+
+all = [
+    "cortex-syslog-generator[dev,docker]"
+]
+
+[project.urls]
+Homepage = "https://github.com/PaloAltoNetworks/cortex-syslog-generator"
+Documentation = "https://github.com/PaloAltoNetworks/cortex-syslog-generator#readme"
+Repository = "https://github.com/PaloAltoNetworks/cortex-syslog-generator"
+Issues = "https://github.com/PaloAltoNetworks/cortex-syslog-generator/issues"
+Changelog = "https://github.com/PaloAltoNetworks/cortex-syslog-generator/releases"
+
+[project.scripts]
+cortex-syslog-generator = "src.main:app"
+cortex-generator = "src.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+# Ruff configuration
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C4",  # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+    "W191",  # indentation contains tabs
+]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg-info",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**/*" = ["S101", "D"]
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.ruff.isort]
+known-first-party = ["src"]
+force-single-line = true
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "faker.*",
+    "numpy.*",
+    "pandas.*",
+    "prometheus_client.*",
+]
+ignore_missing_imports = true
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "tests",
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+# Coverage configuration
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/demo_*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+# Bandit configuration
+[tool.bandit]
+exclude_dirs = ["tests", "build", "dist"]
+tests = ["B201", "B301"]
+skips = ["B101", "B601"]

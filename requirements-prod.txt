@@ -1,6 +1,5 @@
-# Development Dependencies - Full Development Environment
-# Install with: pip install -r requirements.txt
-# For production only: pip install -r requirements-prod.txt
+# Production Dependencies - Core Framework Only
+# Install with: pip install -r requirements-prod.txt
 
 # Core Framework
 pydantic>=2.0.0,<3.0
@@ -39,20 +38,3 @@ pytz>=2023.3,<2025.0
 
 # Security
 cryptography>=41.0.0,<42.0
-
-# Testing Framework
-pytest>=7.4.0,<8.0
-pytest-asyncio>=0.21.0,<1.0
-pytest-mock>=3.11.0,<4.0
-pytest-cov>=4.1.0,<5.0
-httpx-test>=0.1.0,<1.0
-responses>=0.23.0,<1.0
-
-# Code Quality and Linting
-mypy>=1.5.0,<2.0
-ruff>=0.1.0,<1.0
-black>=23.7.0,<24.0
-bandit[toml]>=1.7.5,<2.0
-
-# Development Tools
-pre-commit>=3.3.0,<4.0
