@@ -94,303 +94,303 @@ HTML = '''
 
 <head>
 
-  <meta charset="utf-8">
+  <meta charset="utf-8">
 
-  <title>Gambit the Syslog Generator</title>
+  <title>Gambit the Syslog Generator</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <style>
+  <style>
 
-    body {
+    body {
 
-      background-color: #1a1a1a;
+      background-color: #1a1a1a;
 
-      color: #e0e0e0;
+      color: #e0e0e0;
 
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins', sans-serif;
 
-    }
+    }
 
-    .container {
+    .container {
 
-      max-width: 900px;
+      max-width: 900px;
 
-    }
+    }
 
-    .rounded {
+    .rounded {
 
-      border-color: #333 !important;
+      border-color: #333 !important;
 
-      background-color: #2c2c2c;
+      background-color: #2c2c2c;
 
-    }
+    }
 
-    .form-label, h5 {
+    .form-label, h5 {
 
-      color: #e0e0e0;
+      color: #e0e0e0;
 
-    }
+    }
 
-    .form-control, .form-select, .form-check-input[type="text"] {
+    .form-control, .form-select, .form-check-input[type="text"] {
 
-      background-color: #3e3e3e;
+      background-color: #3e3e3e;
 
-      color: #e0e0e0;
+      color: #e0e0e0;
 
-      border-color: #555;
+      border-color: #555;
 
-    }
+    }
 
-    .form-control:focus, .form-select:focus, .form-check-input[type="text"]:focus {
+    .form-control:focus, .form-select:focus, .form-check-input[type="text"]:focus {
 
-      background-color: #3e3e3e;
+      background-color: #3e3e3e;
 
-      color: #e0e0e0;
+      color: #e0e0e0;
 
-      border-color: #555;
+      border-color: #555;
 
-      box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+      box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
 
-    }
+    }
 
-    .form-check-label {
+    .form-check-label {
 
-      color: #e0e0e0;
+      color: #e0e0e0;
 
-    }
+    }
 
-    .btn-success {
+    .btn-success {
 
-      background-color: #4caf50;
+      background-color: #4caf50;
 
-      border-color: #4caf50;
+      border-color: #4caf50;
 
-    }
+    }
 
-    .btn-warning {
+    .btn-warning {
 
-      background-color: #ff9800;
+      background-color: #ff9800;
 
-      border-color: #ff9800;
+      border-color: #ff9800;
 
-    }
+    }
 
-    .btn-danger {
+    .btn-danger {
 
-      background-color: #f44336;
+      background-color: #f44336;
 
-      border-color: #f44336;
+      border-color: #f44336;
 
-    }
+    }
 
-    .btn-info {
+    .btn-info {
 
-        background-color: #03a9f4;
+        background-color: #03a9f4;
 
-        border-color: #03a9f4;
+        border-color: #03a9f4;
 
-    }
+    }
 
-    #log_display {
+    #log_display {
 
-      height: 400px;
+      height: 400px;
 
-      overflow-y: scroll;
+      overflow-y: scroll;
 
-      background-color: #121212;
+      background-color: #121212;
 
-      border: 1px solid #444;
+      border: 1px solid #444;
 
-      padding: 10px;
+      padding: 10px;
 
-      font-family: monospace;
+      font-family: monospace;
 
-      white-space: pre-wrap;
+      white-space: pre-wrap;
 
-      border-radius: 0.25rem;
+      border-radius: 0.25rem;
 
-    }
+    }
 
-    .log-line {
+    .log-line {
 
-      border-bottom: 1px dashed #333;
+      border-bottom: 1px dashed #333;
 
-      padding-bottom: 5px;
+      padding-bottom: 5px;
 
-      margin-bottom: 5px;
+      margin-bottom: 5px;
 
-    }
+    }
 
-    .alert-info {
+    .alert-info {
 
-        background-color: #2e2e2e;
+        background-color: #2e2e2e;
 
-        color: #e0e0e0;
+        color: #e0e0e0;
 
-        border-color: #444;
+        border-color: #444;
 
-    }
+    }
 
-    .alert-success {
+    .alert-success {
 
-        background-color: #2e2e2e;
+        background-color: #2e2e2e;
 
-        color: #4caf50;
+        color: #4caf50;
 
-        border-color: #444;
+        border-color: #444;
 
-    }
+    }
 
-    .alert-danger {
+    .alert-danger {
 
-        background-color: #2e2e2e;
+        background-color: #2e2e2e;
 
-        color: #f44336;
+        color: #f44336;
 
-        border-color: #444;
+        border-color: #444;
 
-    }
+    }
 
-    .alert-warning {
+    .alert-warning {
 
-        background-color: #2e2e2e;
+        background-color: #2e2e2e;
 
-        color: #ff9800;
+        color: #ff9800;
 
-        border-color: #444;
+        border-color: #444;
 
-    }
+    }
 
-    .story-controls, .random-controls { display: none; }
+    .story-controls, .random-controls { display: none; }
 
-    h5[data-bs-toggle="collapse"] {
+    h5[data-bs-toggle="collapse"] {
 
-        cursor: pointer;
+        cursor: pointer;
 
-    }
+    }
 
-    .accordion-button {
+    .accordion-button {
 
-        background-color: #3e3e3e;
+        background-color: #3e3e3e;
 
-        color: #e0e0e0;
+        color: #e0e0e0;
 
-    }
+    }
 
-    .accordion-button:not(.collapsed) {
+    .accordion-button:not(.collapsed) {
 
-        background-color: #4caf50;
+        background-color: #4caf50;
 
-        color: white;
+        color: white;
 
-    }
+    }
 
-    .accordion-body {
+    .accordion-body {
 
-        background-color: #2c2c2c;
+        background-color: #2c2c2c;
 
-    }
+    }
 
-    #selected-products-container {
+    #selected-products-container {
 
-        margin-top: 1rem;
+        margin-top: 1rem;
 
-    }
+    }
 
-    .product-tag {
+    .product-tag {
 
-        display: inline-block;
+        display: inline-block;
 
-        background-color: #4caf50;
+        background-color: #4caf50;
 
-        color: white;
+        color: white;
 
-        padding: .25rem .5rem;
+        padding: .25rem .5rem;
 
-        border-radius: .25rem;
+        border-radius: .25rem;
 
-        margin-right: .5rem;
+        margin-right: .5rem;
 
-        margin-bottom: .5rem;
+        margin-bottom: .5rem;
 
-        font-size: 0.8rem;
+        font-size: 0.8rem;
 
-    }
+    }
 
-    .product-tag .remove-tag {
+    .product-tag .remove-tag {
 
-        cursor: pointer;
+        cursor: pointer;
 
-        margin-left: .5rem;
+        margin-left: .5rem;
 
-        font-weight: bold;
+        font-weight: bold;
 
-    }
+    }
 
-    footer {
+    footer {
 
-        text-align: center;
+        text-align: center;
 
-        margin-top: 2rem;
+        margin-top: 2rem;
 
-        color: #888;
+        color: #888;
 
-        font-size: 0.8rem;
+        font-size: 0.8rem;
 
-    }
+    }
 
-    footer a {
+    footer a {
 
-        color: #4caf50;
+        color: #4caf50;
 
-    }
+    }
 
-  </style>
+  </style>
 
 </head>
 
 <body class="p-4">
 
-  <div class="container text-center">
+  <div class="container text-center">
 
-    <h1>Gambit</h1>
+    <h1>Gambit</h1>
 
-    <p class="fs-5">The Syslog Generator</p>
+    <p class="fs-5">The Syslog Generator</p>
 
-    <br>
+    <br>
 
-  </div>
+  </div>
 
-  <div class="container">
+  <div class="container">
 
-    <form id="generator-form">
+    <form id="generator-form">
 
-      <div class="row">
+      <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-6">
 
-          <div class="mb-4 p-3 border rounded">
+          <div class="mb-4 p-3 border rounded">
 
-            <h5 class="mb-3">Log Destination & Format</h5>
+            <h5 class="mb-3">Log Destination & Format</h5>
 
-            <div class="mb-3">
+            <div class="mb-3">
 
-              <label for="dest_ip" class="form-label">Syslog receiver IP</label>
+              <label for="dest_ip" class="form-label">Syslog receiver IP</label>
 
-              <input type="text" class="form-control" id="dest_ip" name="dest_ip" required placeholder="127.0.0.1" value="">
+              <input type="text" class="form-control" id="dest_ip" name="dest_ip" required placeholder="127.0.0.1" value="">
 
-              <small class="form-text text-muted">Enter Syslog Receiver IP</small>
+              <small class="form-text text-muted">Enter Syslog Receiver IP</small>
 
-            </div>
+            </div>
 
-            <div id="log-format-sources-row">
+            <div id="log-format-sources-row">
 
-                <div class="mb-3" style="display: none;">
+                <div class="mb-3" style="display: none;">
 
-                  <label for="log_format" class="form-label">Log Format</label>
+                  <label for="log_format" class="form-label">Log Format</label>
 
                   <select class="form-select" id="log_format" name="log_format">
                     <option value="cef" selected>CEF (Common Event Format)</option>
@@ -398,73 +398,73 @@ HTML = '''
                     <option value="json">JSON (for HTTP endpoints)</option>
                   </select>
 
-                </div>
+                </div>
 
-                <div id="standard-log-sources">
+                <div id="standard-log-sources">
 
-                    <div class="mb-3">
+                    <div class="mb-3">
 
-                        <label class="form-label">Log Sources</label>
+                        <label class="form-label">Log Sources</label>
 
-                        <div class="accordion" id="vendorAccordion" style="height: 200px; overflow-y: auto;">
+                        <div class="accordion" id="vendorAccordion" style="height: 200px; overflow-y: auto;">
 
-                            <!-- Accordion items will be injected here by JavaScript -->
+                            <!-- Accordion items will be injected here by JavaScript -->
 
-                        </div>
+                        </div>
 
-                    </div>
+                    </div>
 
-                    <div id="selected-products-container">
+                    <div id="selected-products-container">
 
-                        <label class="form-label">Selected Products</label>
+                        <label class="form-label">Selected Products</label>
 
-                        <div id="selected-products" style="min-height: 50px; background-color: #3e3e3e; border-radius: .25rem; padding: .5rem;"></div>
+                        <div id="selected-products" style="min-height: 50px; background-color: #3e3e3e; border-radius: .25rem; padding: .5rem;"></div>
 
-                    </div>
+                    </div>
 
-                </div>
+                </div>
 
-            </div>
+            </div>
 
-          </div>
+          </div>
 
-        </div>
+        </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6">
 
-          <div class="mb-4 p-3 border rounded">
+          <div class="mb-4 p-3 border rounded">
 
-            <h5 class="mb-3">Sending Options</h5>
+            <h5 class="mb-3">Sending Options</h5>
 
-            <div class="mb-3">
+            <div class="mb-3">
 
-              <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline">
 
-                <input class="form-check-input" type="radio" name="send_mode" id="mode_random" value="random" checked>
+                <input class="form-check-input" type="radio" name="send_mode" id="mode_random" value="random" checked>
 
-                <label class="form-check-label" for="mode_random">Randomization</label>
+                <label class="form-check-label" for="mode_random">Randomization</label>
 
-              </div>
+              </div>
 
-              <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline">
 
-                <input class="form-check-input" type="radio" name="send_mode" id="mode_story" value="story">
+                <input class="form-check-input" type="radio" name="send_mode" id="mode_story" value="story">
 
-                <label class="form-check-label" for="mode_story">Story</label>
+                <label class="form-check-label" for="mode_story">Story</label>
 
-              </div>
+              </div>
 
-            </div>
+            </div>
 
             <div class="random-controls">
 
-                <div class="mb-3" id="random-settings">
+                <div class="mb-3" id="random-settings">
 
-                    <label for="duration_minutes" class="form-label">Session Duration (minutes)</label>
+                    <label for="duration_minutes" class="form-label">Session Duration (minutes)</label>
 
-                    <input type="number" class="form-control" id="duration_minutes" name="duration_minutes" required value="1">
+                    <input type="number" class="form-control" id="duration_minutes" name="duration_minutes" required value="1">
 
-                </div>
+                </div>
 
                 <div class="mb-3">
                     <label for="messages_per_second" class="form-label">Messages per Second</label>
@@ -507,41 +507,41 @@ HTML = '''
 
                 <div class="form-check form-switch mb-3">
 
-                  <input class="form-check-input" type="checkbox" id="custom_log_toggle" name="custom_log_toggle">
+                  <input class="form-check-input" type="checkbox" id="custom_log_toggle" name="custom_log_toggle">
 
-                  <label class="form-check-label" for="custom_log_toggle">Create Custom Log</label>
+                  <label class="form-check-label" for="custom_log_toggle">Create Custom Log</label>
 
-                </div>
+                </div>
 
-                <div id="custom-log-fields" style="display: none;">
+                <div id="custom-log-fields" style="display: none;">
 
-                    <div class="mb-3">
+                    <div class="mb-3">
 
-                        <label for="custom_vendor" class="form-label">Custom Vendor</label>
+                        <label for="custom_vendor" class="form-label">Custom Vendor</label>
 
-                        <input type="text" class="form-control" id="custom_vendor" name="custom_vendor">
+                        <input type="text" class="form-control" id="custom_vendor" name="custom_vendor">
 
-                    </div>
+                    </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3">
 
-                        <label for="custom_product" class="form-label">Custom Product</label>
+                        <label for="custom_product" class="form-label">Custom Product</label>
 
-                        <input type="text" class="form-control" id="custom_product" name="custom_product">
+                        <input type="text" class="form-control" id="custom_product" name="custom_product">
 
-                        <small class="form-text text-muted">Try keywords like: NGFW, EDR, Proxy, VPN</small>
+                        <small class="form-text text-muted">Try keywords like: NGFW, EDR, Proxy, VPN</small>
 
-                    </div>
+                    </div>
 
-                </div>
+                </div>
 
-            </div>
+            </div>
 
-            <div class="story-controls">
+            <div class="story-controls">
 
-                <div class="mb-3">
+                <div class="mb-3">
 
-                    <label for="story_type" class="form-label">Select a Story</label>
+                    <label for="story_type" class="form-label">Select a Story</label>
 
                     <select class="form-select" id="story_type" name="story_type">
                         <optgroup label="APT Group Campaigns (XGen)">
@@ -564,617 +564,617 @@ HTML = '''
                             <option value="pattern:T1134.001_TOKEN_IMPERSONATION">Token Impersonation</option>
                         </optgroup>
                         <optgroup label="Legacy Attack Scenarios">
-                        <optgroup label="Attack Scenarios">
+                        <optgroup label="Attack Scenarios">
 
-                            <option value="rogue_insider_story">Rogue Insider Story</option>
+                            <option value="rogue_insider_story">Rogue Insider Story</option>
 
-                            <option value="web_server_breach_story">Web Server Breach Story</option>
+                            <option value="web_server_breach_story">Web Server Breach Story</option>
 
-                            <option value="brute_force_data_theft_story">Brute-Force & Data Theft Story</option>
+                            <option value="brute_force_data_theft_story">Brute-Force & Data Theft Story</option>
 
-                            <option value="aws_compromise_story">AWS Compromise Story</option>
+                            <option value="aws_compromise_story">AWS Compromise Story</option>
 
-                            <option value="gcp_compromise_story">GCP Compromise Story</option>
+                            <option value="gcp_compromise_story">GCP Compromise Story</option>
 
-                            <option value="azure_compromise_story">Azure Compromise Story</option>
+                            <option value="azure_compromise_story">Azure Compromise Story</option>
 
-                        </optgroup>
+                        </optgroup>
 
-                        <optgroup label="MITRE ATT&CK Tactics">
+                        <optgroup label="MITRE ATT&CK Tactics">
 
-                            <option value="reconnaissance_story">Reconnaissance (TA0043)</option>
+                            <option value="reconnaissance_story">Reconnaissance (TA0043)</option>
 
-                            <option value="resource_development_story">Resource Development (TA0042)</option>
+                            <option value="resource_development_story">Resource Development (TA0042)</option>
 
-                            <option value="initial_access_story">Initial Access (TA0001)</option>
+                            <option value="initial_access_story">Initial Access (TA0001)</option>
 
-                            <option value="execution_story">Execution (TA0002)</option>
+                            <option value="execution_story">Execution (TA0002)</option>
 
-                            <option value="persistence_story">Persistence (TA0003)</option>
+                            <option value="persistence_story">Persistence (TA0003)</option>
 
-                            <option value="privilege_escalation_story">Privilege Escalation (TA0004)</option>
+                            <option value="privilege_escalation_story">Privilege Escalation (TA0004)</option>
 
-                            <option value="defense_evasion_story">Defense Evasion (TA0005)</option>
+                            <option value="defense_evasion_story">Defense Evasion (TA0005)</option>
 
-                            <option value="credential_access_story">Credential Access (TA0006)</option>
+                            <option value="credential_access_story">Credential Access (TA0006)</option>
 
-                            <option value="discovery_story">Discovery (TA0007)</option>
+                            <option value="discovery_story">Discovery (TA0007)</option>
 
-                            <option value="lateral_movement_story">Lateral Movement (TA0008)</option>
+                            <option value="lateral_movement_story">Lateral Movement (TA0008)</option>
 
-                            <option value="collection_story">Collection (TA0009)</option>
+                            <option value="collection_story">Collection (TA0009)</option>
 
-                            <option value="command_and_control_story">Command and Control (TA0011)</option>
+                            <option value="command_and_control_story">Command and Control (TA0011)</option>
 
-                            <option value="exfiltration_story">Exfiltration (TA0010)</option>
+                            <option value="exfiltration_story">Exfiltration (TA0010)</option>
 
-                            <option value="impact_story">Impact (TA0040)</option>
+                            <option value="impact_story">Impact (TA0040)</option>
 
-                        </optgroup>
+                        </optgroup>
 
-                    </select>
+                    </select>
 
-                </div>
+                </div>
 
-                <div class="form-check mb-3">
+                <div class="form-check mb-3">
 
-                    <input class="form-check-input" type="checkbox" id="add_noise" name="add_noise" checked>
+                    <input class="form-check-input" type="checkbox" id="add_noise" name="add_noise" checked>
 
-                    <label class="form-check-label" for="add_noise">Add Noise (up to 100 logs total)</label>
+                    <label class="form-check-label" for="add_noise">Add Noise (up to 100 logs total)</label>
 
-                </div>
+                </div>
 
-            </div>
+            </div>
 
-            <div class="d-flex gap-2 mb-3">
+            <div class="d-flex gap-2 mb-3">
 
-                <button type="button" class="btn btn-success" id="start-btn">Start</button>
+                <button type="button" class="btn btn-success" id="start-btn">Start</button>
 
-                <button type="button" class="btn btn-warning" id="pause-btn">Pause</button>
+                <button type="button" class="btn btn-warning" id="pause-btn">Pause</button>
 
-                <button type="button" class="btn btn-danger" id="stop-btn">Stop</button>
+                <button type="button" class="btn btn-danger" id="stop-btn">Stop</button>
 
-            </div>
+            </div>
 
-            <div class="form-check mb-3">
+            <div class="form-check mb-3">
 
-              <input class="form-check-input" type="checkbox" id="save_file" name="save_file">
+              <input class="form-check-input" type="checkbox" id="save_file" name="save_file">
 
-              <label class="form-check-label" for="save_file">Save generated logs to CSV file</label>
+              <label class="form-check-label" for="save_file">Save generated logs to CSV file</label>
 
-            </div>
+            </div>
 
-          </div>
+          </div>
 
-        </div>
+        </div>
 
-      </div>
+      </div>
 
-    </form>
+    </form>
 
-    <div id="status-alert" class="alert mt-3 d-none"></div>
+    <div id="status-alert" class="alert mt-3 d-none"></div>
 
-    <div class="mt-4">
+    <div class="mt-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="d-flex justify-content-between align-items-center mb-2">
 
-            <h3>Live Log Display</h3>
+            <h3>Live Log Display</h3>
 
-            <div>
+            <div>
 
-                <button type="button" class="btn btn-secondary btn-sm" id="new-session-btn">New Session</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="new-session-btn">New Session</button>
 
-                <button type="button" class="btn btn-info btn-sm" id="clear-btn">Clear Logs</button>
+                <button type="button" class="btn btn-info btn-sm" id="clear-btn">Clear Logs</button>
 
-            </div>
+            </div>
 
-        </div>
+        </div>
 
-        <div id="log_display"></div>
+        <div id="log_display"></div>
 
-    </div>
+    </div>
 
-  </div>
+  </div>
 
-  <footer>
+  <footer>
 
-      <p>Gambit was developed by Ben Sookying, created for security practioners. This is not intended for commercial use. Make sure to visit the github repo for the latest version of the code. <a href="https://github.com/bsookying/Gambit-The-Syslog-Generator" target="_blank">https://github.com/bsookying/Gambit-The-Syslog-Generator</a></p>
+      <p>Gambit was developed by Ben Sookying, created for security practioners. This is not intended for commercial use. Make sure to visit the github repo for the latest version of the code. <a href="https://github.com/bsookying/Gambit-The-Syslog-Generator" target="_blank">https://github.com/bsookying/Gambit-The-Syslog-Generator</a></p>
 
-  </footer>
+  </footer>
 
   
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
+  <script>
 
-    const form = document.getElementById('generator-form');
+    const form = document.getElementById('generator-form');
 
-    const startBtn = document.getElementById('start-btn');
+    const startBtn = document.getElementById('start-btn');
 
-    const pauseBtn = document.getElementById('pause-btn');
+    const pauseBtn = document.getElementById('pause-btn');
 
-    const stopBtn = document.getElementById('stop-btn');
+    const stopBtn = document.getElementById('stop-btn');
 
-    const clearBtn = document.getElementById('clear-btn');
+    const clearBtn = document.getElementById('clear-btn');
 
-    const newSessionBtn = document.getElementById('new-session-btn');
+    const newSessionBtn = document.getElementById('new-session-btn');
 
-    const statusAlert = document.getElementById('status-alert');
+    const statusAlert = document.getElementById('status-alert');
 
-    const logDisplay = document.getElementById('log_display');
+    const logDisplay = document.getElementById('log_display');
 
-    const storyModeRadio = document.getElementById('mode_story');
+    const storyModeRadio = document.getElementById('mode_story');
 
-    const randomModeRadio = document.getElementById('mode_random');
+    const randomModeRadio = document.getElementById('mode_random');
 
-    const storyControls = document.querySelector('.story-controls');
+    const storyControls = document.querySelector('.story-controls');
 
-    const randomControls = document.querySelector('.random-controls');
+    const randomControls = document.querySelector('.random-controls');
 
-    const standardLogSources = document.getElementById('standard-log-sources');
+    const standardLogSources = document.getElementById('standard-log-sources');
 
-    const customLogToggle = document.getElementById('custom_log_toggle');
+    const customLogToggle = document.getElementById('custom_log_toggle');
 
-    const customLogFields = document.getElementById('custom-log-fields');
+    const customLogFields = document.getElementById('custom-log-fields');
 
   
 
-    const productsByVendor = {
+    const productsByVendor = {
 
-        "AWS": ["CloudTrail", "VPC Flow Logs"],
+        "AWS": ["CloudTrail", "VPC Flow Logs"],
 
-        "Azure": ["Audit Logs", "Flow Logs", "Signin Log", "AD Audit Logs"],
+        "Azure": ["Audit Logs", "Flow Logs", "Signin Log", "AD Audit Logs"],
 
-        "GCP": ["Audit Logs", "Flow Logs"],
+        "GCP": ["Audit Logs", "Flow Logs"],
 
-        "Kubernetes": ["Audit Logs"],
+        "Kubernetes": ["Audit Logs"],
 
-        "Okta": ["SSO", "Audit"],
+        "Okta": ["SSO", "Audit"],
 
-        "Duo": ["Authentication"],
+        "Duo": ["Authentication"],
 
-        "PingOne": ["SSO"],
+        "PingOne": ["SSO"],
 
-        "OneLogin": ["Events"],
+        "OneLogin": ["Events"],
 
-        "Google Workspace": ["Audit", "Authentication"],
+        "Google Workspace": ["Audit", "Authentication"],
 
-        "Microsoft 365": ["Email Logs"],
+        "Microsoft 365": ["Email Logs"],
 
-        "Palo Alto Networks": ["PAN-OS", "Global Protect", "Platform Logs", "URL Logs"],
+        "Palo Alto Networks": ["PAN-OS", "Global Protect", "Platform Logs", "URL Logs"],
 
-        "Cisco": ["ASA"],
+        "Cisco": ["ASA"],
 
         "Zscaler": ["Web Proxy", "NSS Firewall", "ZPA User Activity", "ZPA User Status", "ZPA Connector", "ZPA Audit"],
 
-        "Proofpoint": ["Email Security"],
+        "Proofpoint": ["Email Security"],
 
-        "Microsoft": ["Defender for Endpoint"],
+        "Microsoft": ["Defender for Endpoint"],
 
-        "CrowdStrike": ["Falcon"],
+        "CrowdStrike": ["Falcon"],
 
-        "SentinelOne": ["EDR"],
+        "SentinelOne": ["EDR"],
 
-        "Dropbox": ["Events"],
+        "Dropbox": ["Events"],
 
-        "Windows": ["Event Collector"]
+        "Windows": ["Event Collector"]
 
-    };
-
-  
-
-    let eventSource = null;
+    };
 
   
 
-    function setButtonsState(running, paused) {
-
-      startBtn.disabled = running;
-
-      pauseBtn.disabled = !running;
-
-      stopBtn.disabled = !running;
-
-      pauseBtn.textContent = paused ? 'Resume' : 'Pause';
-
-    }
+    let eventSource = null;
 
   
 
-    function showStatus(message, type = 'info') {
+    function setButtonsState(running, paused) {
 
-      statusAlert.textContent = message;
+      startBtn.disabled = running;
 
-      statusAlert.className = `alert alert-${type} mt-3`;
+      pauseBtn.disabled = !running;
 
-      statusAlert.classList.remove('d-none');
+      stopBtn.disabled = !running;
 
-    }
+      pauseBtn.textContent = paused ? 'Resume' : 'Pause';
 
-  
-
-    function startStreaming(stream_url) {
-
-      if (eventSource) {
-
-        eventSource.close();
-
-      }
-
-      logDisplay.innerHTML = '';
-
-      eventSource = new EventSource(stream_url);
-
-      setupEventSource();
-
-    }
+    }
 
   
 
-    function setupEventSource() {
+    function showStatus(message, type = 'info') {
 
-        eventSource.onmessage = function(event) {
+      statusAlert.textContent = message;
 
-          try {
+      statusAlert.className = `alert alert-${type} mt-3`;
 
-            const data = JSON.parse(event.data);
+      statusAlert.classList.remove('d-none');
 
-            if (data.status) {
-
-              showStatus(data.status, data.type);
-
-              setButtonsState(data.is_running, data.is_paused);
-
-              if (data.status.includes("completed") || data.status.includes("stopped") || data.status.includes("not yet implemented")) {
-
-                  if(eventSource) eventSource.close();
-
-              }
-
-            } else if (data.log) {
-
-              const logElement = document.createElement('div');
-
-              logElement.className = 'log-line';
-
-              logElement.textContent = data.log;
-
-              logDisplay.appendChild(logElement);
-
-              logDisplay.scrollTop = logDisplay.scrollHeight;
-
-            }
-
-          } catch (e) {
-
-            console.error("Failed to parse JSON:", event.data, e);
-
-          }
-
-        };
-
-        eventSource.onerror = function(err) {
-
-          console.error("EventSource failed:", err);
-
-          eventSource.close();
-
-          showStatus("Event stream failed. Check console for details.", 'danger');
-
-        };
-
-    }
+    }
 
   
 
-    function updateUIMode(sendMode) {
+    function startStreaming(stream_url) {
 
-        if (sendMode === 'story') {
+      if (eventSource) {
 
-            storyControls.style.display = 'block';
+        eventSource.close();
 
-            randomControls.style.display = 'none';
+      }
 
-            standardLogSources.style.display = 'none';
+      logDisplay.innerHTML = '';
 
-        } else { // 'random' mode
+      eventSource = new EventSource(stream_url);
 
-            storyControls.style.display = 'none';
+      setupEventSource();
 
-            randomControls.style.display = 'block';
-
-            const isCustom = customLogToggle.checked;
-
-            customLogFields.style.display = isCustom ? 'block' : 'none';
-
-            standardLogSources.style.display = isCustom ? 'none' : 'block';
-
-        }
-
-    }
-
-    function updateSelectedProductsDisplay() {
-
-        const selectedProductsContainer = document.getElementById('selected-products');
-
-        selectedProductsContainer.innerHTML = '';
-
-        const selectedCheckboxes = document.querySelectorAll('input[name="products"]:checked');
-
-        selectedCheckboxes.forEach(cb => {
-
-            const [vendor, product] = cb.value.split('-');
-
-            const tag = document.createElement('span');
-
-            tag.className = 'product-tag';
-
-            tag.textContent = `${product} (${vendor})`;
-
-            const removeSpan = document.createElement('span');
-
-            removeSpan.className = 'remove-tag';
-
-            removeSpan.textContent = 'x';
-
-            removeSpan.onclick = () => {
-
-                cb.checked = false;
-
-                updateSelectedProductsDisplay();
-
-            };
-
-            tag.appendChild(removeSpan);
-
-            selectedProductsContainer.appendChild(tag);
-
-        });
-
-    }
+    }
 
   
 
-    function populateVendors() {
+    function setupEventSource() {
 
-        const vendorAccordion = document.getElementById('vendorAccordion');
+        eventSource.onmessage = function(event) {
 
-        Object.keys(productsByVendor).forEach((vendor, index) => {
+          try {
 
-            const vendorId = `vendor_${vendor.replace(/ /g, '_')}`;
+            const data = JSON.parse(event.data);
 
-            const collapseId = `collapse_${vendorId}`;
+            if (data.status) {
 
-            const accordionItem = document.createElement('div');
+              showStatus(data.status, data.type);
 
-            accordionItem.className = 'accordion-item';
+              setButtonsState(data.is_running, data.is_paused);
 
-  
+              if (data.status.includes("completed") || data.status.includes("stopped") || data.status.includes("not yet implemented")) {
 
-            let productCheckboxesHTML = '';
+                  if(eventSource) eventSource.close();
 
-            const products = productsByVendor[vendor] || [];
+              }
 
-            products.forEach(product => {
+            } else if (data.log) {
 
-                const productIdentifier = `${vendor}-${product}`;
+              const logElement = document.createElement('div');
 
-                productCheckboxesHTML += `
+              logElement.className = 'log-line';
 
-                    <div class="form-check">
+              logElement.textContent = data.log;
 
-                        <input class="form-check-input" type="checkbox" name="products" value="${productIdentifier}" id="prod_${productIdentifier.replace(/ /g, '_')}">
+              logDisplay.appendChild(logElement);
 
-                        <label class="form-check-label" for="prod_${productIdentifier.replace(/ /g, '_')}">${product}</label>
+              logDisplay.scrollTop = logDisplay.scrollHeight;
 
-                    </div>
+            }
 
-                `;
+          } catch (e) {
 
-            });
+            console.error("Failed to parse JSON:", event.data, e);
 
-  
+          }
 
-            accordionItem.innerHTML = `
+        };
 
-                <h2 class="accordion-header" id="heading_${vendorId}">
+        eventSource.onerror = function(err) {
 
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
+          console.error("EventSource failed:", err);
 
-                    ${vendor}
+          eventSource.close();
 
-                  </button>
+          showStatus("Event stream failed. Check console for details.", 'danger');
 
-                </h2>
+        };
 
-                <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="heading_${vendorId}" data-bs-parent="#vendorAccordion">
-
-                  <div class="accordion-body">
-
-                    ${productCheckboxesHTML}
-
-                  </div>
-
-                </div>
-
-            `;
-
-            vendorAccordion.appendChild(accordionItem);
-
-        });
-
-        vendorAccordion.addEventListener('change', updateSelectedProductsDisplay);
-
-    }
+    }
 
   
 
-    customLogToggle.addEventListener('change', () => {
+    function updateUIMode(sendMode) {
 
-        const isCustom = customLogToggle.checked;
+        if (sendMode === 'story') {
 
-        customLogFields.style.display = isCustom ? 'block' : 'none';
+            storyControls.style.display = 'block';
 
-        standardLogSources.style.display = isCustom ? 'none' : 'block';
+            randomControls.style.display = 'none';
 
-    });
+            standardLogSources.style.display = 'none';
 
-  
+        } else { // 'random' mode
 
-    randomModeRadio.addEventListener('change', (e) => updateUIMode(e.target.value));
+            storyControls.style.display = 'none';
 
-    storyModeRadio.addEventListener('change', (e) => updateUIMode(e.target.value));
+            randomControls.style.display = 'block';
 
-    startBtn.addEventListener('click', () => {
+            const isCustom = customLogToggle.checked;
 
-        const formData = new FormData(form);
+            customLogFields.style.display = isCustom ? 'block' : 'none';
 
-        const data = Object.fromEntries(formData.entries());
+            standardLogSources.style.display = isCustom ? 'none' : 'block';
 
-        if (data.custom_log_toggle) {
+        }
 
-            if (!data.custom_vendor || !data.custom_product) {
+    }
 
-                showStatus('Please provide both a custom vendor and product.', 'danger');
+    function updateSelectedProductsDisplay() {
 
-                return;
+        const selectedProductsContainer = document.getElementById('selected-products');
 
-            }
+        selectedProductsContainer.innerHTML = '';
 
-        } else if (data.send_mode === 'random') {
+        const selectedCheckboxes = document.querySelectorAll('input[name="products"]:checked');
 
-            data.products = Array.from(document.querySelectorAll('input[name="products"]:checked')).map(cb => cb.value);
+        selectedCheckboxes.forEach(cb => {
 
-            if (data.products.length === 0) {
+            const [vendor, product] = cb.value.split('-');
 
-                showStatus('Please select at least one product for random mode.', 'danger');
+            const tag = document.createElement('span');
 
-                return;
+            tag.className = 'product-tag';
 
-            }
+            tag.textContent = `${product} (${vendor})`;
 
-        }
+            const removeSpan = document.createElement('span');
 
-  
+            removeSpan.className = 'remove-tag';
 
-        data.dest_port = 514;
+            removeSpan.textContent = 'x';
 
-        fetch('/start', {
+            removeSpan.onclick = () => {
 
-            method: 'POST',
+                cb.checked = false;
 
-            headers: { 'Content-Type': 'application/json' },
+                updateSelectedProductsDisplay();
 
-            body: JSON.stringify(data)
+            };
 
-        }).then(response => response.json()).then(result => {
+            tag.appendChild(removeSpan);
 
-            if (result.success) {
+            selectedProductsContainer.appendChild(tag);
 
-                showStatus(result.message, 'success');
+        });
 
-                setButtonsState(true, false);
-
-                startStreaming('/stream');
-
-            } else {
-
-                showStatus(result.message, 'danger');
-
-            }
-
-        });
-
-    });
+    }
 
   
 
-    pauseBtn.addEventListener('click', () => {
+    function populateVendors() {
 
-        fetch('/pause', { method: 'POST' }).then(response => response.json()).then(result => {
+        const vendorAccordion = document.getElementById('vendorAccordion');
 
-            showStatus(result.message, 'warning');
+        Object.keys(productsByVendor).forEach((vendor, index) => {
 
-            setButtonsState(result.is_running, result.is_paused);
+            const vendorId = `vendor_${vendor.replace(/ /g, '_')}`;
 
-        });
+            const collapseId = `collapse_${vendorId}`;
 
-    });
+            const accordionItem = document.createElement('div');
 
-  
-
-    stopBtn.addEventListener('click', () => {
-
-        fetch('/stop', { method: 'POST' }).then(response => response.json()).then(result => {
-
-            showStatus(result.message, 'danger');
-
-            setButtonsState(false, false);
-
-            if (eventSource) {
-
-                eventSource.close();
-
-                eventSource = null;
-
-            }
-
-        });
-
-    });
+            accordionItem.className = 'accordion-item';
 
   
 
-    clearBtn.addEventListener('click', () => {
+            let productCheckboxesHTML = '';
 
-        logDisplay.innerHTML = '';
+            const products = productsByVendor[vendor] || [];
 
-        showStatus('Log display cleared.', 'info');
+            products.forEach(product => {
 
-    });
+                const productIdentifier = `${vendor}-${product}`;
 
-  
+                productCheckboxesHTML += `
 
-    newSessionBtn.addEventListener('click', () => {
+                    <div class="form-check">
 
-        logDisplay.innerHTML = '';
+                        <input class="form-check-input" type="checkbox" name="products" value="${productIdentifier}" id="prod_${productIdentifier.replace(/ /g, '_')}">
 
-        form.reset();
+                        <label class="form-check-label" for="prod_${productIdentifier.replace(/ /g, '_')}">${product}</label>
 
-        updateSelectedProductsDisplay();
+                    </div>
 
-        updateUIMode('random');
+                `;
 
-        showStatus('New session started.', 'info');
-
-    });
+            });
 
   
 
-    // Initial state check and UI update
+            accordionItem.innerHTML = `
 
-    populateVendors();
+                <h2 class="accordion-header" id="heading_${vendorId}">
 
-    fetch('/status').then(response => response.json()).then(status => {
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false" aria-controls="${collapseId}">
 
-      setButtonsState(status.is_running, status.is_paused);
+                    ${vendor}
 
-      if (status.is_running) {
+                  </button>
 
-        showStatus(status.message, 'info');
+                </h2>
 
-        startStreaming('/stream');
+                <div id="${collapseId}" class="accordion-collapse collapse" aria-labelledby="heading_${vendorId}" data-bs-parent="#vendorAccordion">
 
-      }
+                  <div class="accordion-body">
 
-      updateUIMode(form.elements.send_mode.value);
+                    ${productCheckboxesHTML}
 
-    });
+                  </div>
+
+                </div>
+
+            `;
+
+            vendorAccordion.appendChild(accordionItem);
+
+        });
+
+        vendorAccordion.addEventListener('change', updateSelectedProductsDisplay);
+
+    }
 
   
 
-  </script>
+    customLogToggle.addEventListener('change', () => {
+
+        const isCustom = customLogToggle.checked;
+
+        customLogFields.style.display = isCustom ? 'block' : 'none';
+
+        standardLogSources.style.display = isCustom ? 'none' : 'block';
+
+    });
+
+  
+
+    randomModeRadio.addEventListener('change', (e) => updateUIMode(e.target.value));
+
+    storyModeRadio.addEventListener('change', (e) => updateUIMode(e.target.value));
+
+    startBtn.addEventListener('click', () => {
+
+        const formData = new FormData(form);
+
+        const data = Object.fromEntries(formData.entries());
+
+        if (data.custom_log_toggle) {
+
+            if (!data.custom_vendor || !data.custom_product) {
+
+                showStatus('Please provide both a custom vendor and product.', 'danger');
+
+                return;
+
+            }
+
+        } else if (data.send_mode === 'random') {
+
+            data.products = Array.from(document.querySelectorAll('input[name="products"]:checked')).map(cb => cb.value);
+
+            if (data.products.length === 0) {
+
+                showStatus('Please select at least one product for random mode.', 'danger');
+
+                return;
+
+            }
+
+        }
+
+  
+
+        data.dest_port = 514;
+
+        fetch('/start', {
+
+            method: 'POST',
+
+            headers: { 'Content-Type': 'application/json' },
+
+            body: JSON.stringify(data)
+
+        }).then(response => response.json()).then(result => {
+
+            if (result.success) {
+
+                showStatus(result.message, 'success');
+
+                setButtonsState(true, false);
+
+                startStreaming('/stream');
+
+            } else {
+
+                showStatus(result.message, 'danger');
+
+            }
+
+        });
+
+    });
+
+  
+
+    pauseBtn.addEventListener('click', () => {
+
+        fetch('/pause', { method: 'POST' }).then(response => response.json()).then(result => {
+
+            showStatus(result.message, 'warning');
+
+            setButtonsState(result.is_running, result.is_paused);
+
+        });
+
+    });
+
+  
+
+    stopBtn.addEventListener('click', () => {
+
+        fetch('/stop', { method: 'POST' }).then(response => response.json()).then(result => {
+
+            showStatus(result.message, 'danger');
+
+            setButtonsState(false, false);
+
+            if (eventSource) {
+
+                eventSource.close();
+
+                eventSource = null;
+
+            }
+
+        });
+
+    });
+
+  
+
+    clearBtn.addEventListener('click', () => {
+
+        logDisplay.innerHTML = '';
+
+        showStatus('Log display cleared.', 'info');
+
+    });
+
+  
+
+    newSessionBtn.addEventListener('click', () => {
+
+        logDisplay.innerHTML = '';
+
+        form.reset();
+
+        updateSelectedProductsDisplay();
+
+        updateUIMode('random');
+
+        showStatus('New session started.', 'info');
+
+    });
+
+  
+
+    // Initial state check and UI update
+
+    populateVendors();
+
+    fetch('/status').then(response => response.json()).then(status => {
+
+      setButtonsState(status.is_running, status.is_paused);
+
+      if (status.is_running) {
+
+        showStatus(status.message, 'info');
+
+        startStreaming('/stream');
+
+      }
+
+      updateUIMode(form.elements.send_mode.value);
+
+    });
+
+  
+
+  </script>
 
 </body>
 
@@ -1188,35 +1188,35 @@ HTML = '''
 
 def format_log_line(vendor, product, severity, event_id, message_dict, fmt='cef'):
 
-    """Formats a log message into a CEF or LEEF string."""
+    """Formats a log message into a CEF or LEEF string."""
 
-    now = datetime.now()
+    now = datetime.now()
 
-    log_data = {
+    log_data = {
 
-        'timestamp': now.isoformat(), 'vendor': vendor, 'product': product, 'severity': severity,
+        'timestamp': now.isoformat(), 'vendor': vendor, 'product': product, 'severity': severity,
 
-        'event_id': event_id, 'name': message_dict.get('name', 'N/A'),
+        'event_id': event_id, 'name': message_dict.get('name', 'N/A'),
 
-        'username': message_dict.get('username', 'N/A'), 'src_ip': message_dict.get('src_ip', 'N/A'),
+        'username': message_dict.get('username', 'N/A'), 'src_ip': message_dict.get('src_ip', 'N/A'),
 
-        'dst_ip': message_dict.get('dst_ip', 'N/A'), 'message': message_dict.get('message', 'N/A')
+        'dst_ip': message_dict.get('dst_ip', 'N/A'), 'message': message_dict.get('message', 'N/A')
 
-    }
+    }
 
-    header = f'{now.strftime("%b %d %H:%M:%S")} {HOSTNAME} CEF:0|{vendor}|{product}|1.0|{event_id}|{message_dict.get("name", "N/A")}|{severity}|'
+    header = f'{now.strftime("%b %d %H:%M:%S")} {HOSTNAME} CEF:0|{vendor}|{product}|1.0|{event_id}|{message_dict.get("name", "N/A")}|{severity}|'
 
-    fields = [f'suser={message_dict.get("username", "")}', f'src={message_dict.get("src_ip", "")}', f'dst={message_dict.get("dst_ip", "")}', f'msg={message_dict.get("message", "")}']
+    fields = [f'suser={message_dict.get("username", "")}', f'src={message_dict.get("src_ip", "")}', f'dst={message_dict.get("dst_ip", "")}', f'msg={message_dict.get("message", "")}']
 
-    log_data['log_line'] = header + " ".join(filter(None, fields))
+    log_data['log_line'] = header + " ".join(filter(None, fields))
 
-    return log_data
+    return log_data
 
   
 
 def gen_user_info():
 
-    return {'username': fake.user_name(), 'department': random.choice(DEPARTMENTS)}
+    return {'username': fake.user_name(), 'department': random.choice(DEPARTMENTS)}
 
   
 
@@ -1224,63 +1224,63 @@ def gen_user_info():
 
 def gen_custom_log(fmt='cef', **kwargs):
 
-    vendor = kwargs.get('custom_vendor', 'CustomVendor')
+    vendor = kwargs.get('custom_vendor', 'CustomVendor')
 
-    product = kwargs.get('custom_product', 'CustomProduct')
+    product = kwargs.get('custom_product', 'CustomProduct')
 
-    product_lower = product.lower()
-
-  
-
-    message_dict = {
-
-        'username': fake.user_name(),
-
-        'src_ip': fake.ipv4_public(),
-
-        'dst_ip': fake.ipv4_private(),
-
-    }
+    product_lower = product.lower()
 
   
 
-    # Context-aware log generation based on keywords
+    message_dict = {
 
-    if any(kw in product_lower for kw in ['ngfw', 'firewall', 'fw']):
+        'username': fake.user_name(),
 
-        message_dict['name'] = random.choice(['Connection Allowed', 'Connection Denied', 'Threat Detected'])
+        'src_ip': fake.ipv4_public(),
 
-        message_dict['message'] = f"Firewall event: {message_dict['name']} from {message_dict['src_ip']} to {message_dict['dst_ip']}"
+        'dst_ip': fake.ipv4_private(),
 
-    elif 'edr' in product_lower:
-
-        message_dict['name'] = random.choice(['Suspicious Process Detected', 'Malware Quarantined', 'Ransomware Behavior Blocked'])
-
-        message_dict['message'] = f"EDR alert: {message_dict['name']} on host {fake.hostname()}"
-
-    elif 'proxy' in product_lower:
-
-        message_dict['name'] = random.choice(['URL Blocked', 'URL Allowed', 'Content Category Filtered'])
-
-        message_dict['message'] = f"Proxy event: {message_dict['name']} for user {message_dict['username']}"
-
-    elif 'vpn' in product_lower:
-
-        message_dict['name'] = random.choice(['VPN Connection Success', 'VPN Connection Failed'])
-
-        message_dict['message'] = f"VPN event: {message_dict['name']} for user {message_dict['username']} from {message_dict['src_ip']}"
-
-    else:
-
-        # Fallback to generic message
-
-        message_dict['name'] = 'Custom Event'
-
-        message_dict['message'] = f'This is a custom log event for {product}.'
+    }
 
   
 
-    return format_log_line(vendor, product, 5, 99999, message_dict, fmt)
+    # Context-aware log generation based on keywords
+
+    if any(kw in product_lower for kw in ['ngfw', 'firewall', 'fw']):
+
+        message_dict['name'] = random.choice(['Connection Allowed', 'Connection Denied', 'Threat Detected'])
+
+        message_dict['message'] = f"Firewall event: {message_dict['name']} from {message_dict['src_ip']} to {message_dict['dst_ip']}"
+
+    elif 'edr' in product_lower:
+
+        message_dict['name'] = random.choice(['Suspicious Process Detected', 'Malware Quarantined', 'Ransomware Behavior Blocked'])
+
+        message_dict['message'] = f"EDR alert: {message_dict['name']} on host {fake.hostname()}"
+
+    elif 'proxy' in product_lower:
+
+        message_dict['name'] = random.choice(['URL Blocked', 'URL Allowed', 'Content Category Filtered'])
+
+        message_dict['message'] = f"Proxy event: {message_dict['name']} for user {message_dict['username']}"
+
+    elif 'vpn' in product_lower:
+
+        message_dict['name'] = random.choice(['VPN Connection Success', 'VPN Connection Failed'])
+
+        message_dict['message'] = f"VPN event: {message_dict['name']} for user {message_dict['username']} from {message_dict['src_ip']}"
+
+    else:
+
+        # Fallback to generic message
+
+        message_dict['name'] = 'Custom Event'
+
+        message_dict['message'] = f'This is a custom log event for {product}.'
+
+  
+
+    return format_log_line(vendor, product, 5, 99999, message_dict, fmt)
 
   
   
@@ -1289,191 +1289,191 @@ def gen_custom_log(fmt='cef', **kwargs):
 
 def gen_aws_cloudtrail_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'ConsoleLogin', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Successful AWS Console login'}
+    message_dict = {'name': 'ConsoleLogin', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Successful AWS Console login'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("AWS", "CloudTrail", 3, 20000, message_dict, fmt)
+    return format_log_line("AWS", "CloudTrail", 3, 20000, message_dict, fmt)
 
   
 
 def gen_aws_vpc_flow_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'VPC Flow', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'AWS VPC network flow event'}
+    message_dict = {'name': 'VPC Flow', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'AWS VPC network flow event'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("AWS", "VPC Flow Logs", 2, 20001, message_dict, fmt)
+    return format_log_line("AWS", "VPC Flow Logs", 2, 20001, message_dict, fmt)
 
   
 
 def gen_azure_audit_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Update User', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Azure AD user updated'}
+    message_dict = {'name': 'Update User', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Azure AD user updated'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Azure", "Audit Logs", 4, 9000, message_dict, fmt)
+    return format_log_line("Azure", "Audit Logs", 4, 9000, message_dict, fmt)
 
   
 
 def gen_azure_flow_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Network Flow', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'Azure network flow event'}
+    message_dict = {'name': 'Network Flow', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'Azure network flow event'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Azure", "Flow Logs", 2, 9001, message_dict, fmt)
+    return format_log_line("Azure", "Flow Logs", 2, 9001, message_dict, fmt)
 
   
 
 def gen_azure_signin_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'UserLoggedIn', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Successful user sign-in'}
+    message_dict = {'name': 'UserLoggedIn', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Successful user sign-in'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Azure", "Signin Log", 3, 9002, message_dict, fmt)
+    return format_log_line("Azure", "Signin Log", 3, 9002, message_dict, fmt)
 
   
 
 def gen_azure_ad_audit_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Add member to group', 'username': fake.user_name(), 'message': 'User added to security group'}
+    message_dict = {'name': 'Add member to group', 'username': fake.user_name(), 'message': 'User added to security group'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Azure", "AD Audit Logs", 6, 9003, message_dict, fmt)
+    return format_log_line("Azure", "AD Audit Logs", 6, 9003, message_dict, fmt)
 
   
 
 def gen_gcp_audit_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'v1.compute.instances.insert', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'GCP VM instance created'}
+    message_dict = {'name': 'v1.compute.instances.insert', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'GCP VM instance created'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("GCP", "Audit Logs", 5, 10000, message_dict, fmt)
+    return format_log_line("GCP", "Audit Logs", 5, 10000, message_dict, fmt)
 
   
 
 def gen_gcp_flow_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'VPC Flow', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'GCP network flow event'}
+    message_dict = {'name': 'VPC Flow', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'GCP network flow event'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("GCP", "Flow Logs", 2, 10001, message_dict, fmt)
+    return format_log_line("GCP", "Flow Logs", 2, 10001, message_dict, fmt)
 
   
 
 def gen_kubernetes_audit_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'create-pod', 'username': 'system:kube-scheduler', 'src_ip': fake.ipv4_private(), 'message': 'Pod created in default namespace'}
+    message_dict = {'name': 'create-pod', 'username': 'system:kube-scheduler', 'src_ip': fake.ipv4_private(), 'message': 'Pod created in default namespace'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Kubernetes", "Audit Logs", 4, 11000, message_dict, fmt)
+    return format_log_line("Kubernetes", "Audit Logs", 4, 11000, message_dict, fmt)
 
   
 
 def gen_okta_sso_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'user.session.start', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Okta SSO event'}
+    message_dict = {'name': 'user.session.start', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Okta SSO event'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Okta", "SSO", 3, 3000, message_dict, fmt)
+    return format_log_line("Okta", "SSO", 3, 3000, message_dict, fmt)
 
   
 
 def gen_okta_audit_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'user.privilege.grant', 'username': fake.user_name(), 'message': 'User granted admin privileges'}
+    message_dict = {'name': 'user.privilege.grant', 'username': fake.user_name(), 'message': 'User granted admin privileges'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Okta", "Audit", 8, 3001, message_dict, fmt)
+    return format_log_line("Okta", "Audit", 8, 3001, message_dict, fmt)
 
   
 
 def gen_duo_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'authentication.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Duo authentication successful'}
+    message_dict = {'name': 'authentication.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Duo authentication successful'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Duo", "Authentication", 2, 12000, message_dict, fmt)
+    return format_log_line("Duo", "Authentication", 2, 12000, message_dict, fmt)
 
   
 
 def gen_pingone_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'sso.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'PingOne SSO successful'}
+    message_dict = {'name': 'sso.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'PingOne SSO successful'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("PingOne", "SSO", 2, 13000, message_dict, fmt)
+    return format_log_line("PingOne", "SSO", 2, 13000, message_dict, fmt)
 
   
 
 def gen_onelogin_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'login.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'OneLogin event'}
+    message_dict = {'name': 'login.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'OneLogin event'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("OneLogin", "Events", 2, 14000, message_dict, fmt)
+    return format_log_line("OneLogin", "Events", 2, 14000, message_dict, fmt)
 
   
 
 def gen_google_workspace_audit_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'drive.view', 'username': fake.user_name(), 'message': 'User viewed a file in Google Drive'}
+    message_dict = {'name': 'drive.view', 'username': fake.user_name(), 'message': 'User viewed a file in Google Drive'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Google Workspace", "Audit", 3, 15000, message_dict, fmt)
+    return format_log_line("Google Workspace", "Audit", 3, 15000, message_dict, fmt)
 
   
 
 def gen_google_workspace_auth_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'login.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Google Workspace login successful'}
+    message_dict = {'name': 'login.success', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'Google Workspace login successful'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Google Workspace", "Authentication", 2, 15001, message_dict, fmt)
+    return format_log_line("Google Workspace", "Authentication", 2, 15001, message_dict, fmt)
 
   
 
 def gen_m365_email_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'email.sent', 'username': fake.user_name(), 'message': 'Email sent from user mailbox'}
+    message_dict = {'name': 'email.sent', 'username': fake.user_name(), 'message': 'Email sent from user mailbox'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Microsoft 365", "Email Logs", 2, 16000, message_dict, fmt)
+    return format_log_line("Microsoft 365", "Email Logs", 2, 16000, message_dict, fmt)
 
   
 
 def gen_panos_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'TRAFFIC', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'Traffic log'}
+    message_dict = {'name': 'TRAFFIC', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'Traffic log'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Palo Alto Networks", "PAN-OS", 2, 1000, message_dict, fmt)
+    return format_log_line("Palo Alto Networks", "PAN-OS", 2, 1000, message_dict, fmt)
 
   
 
 def gen_cisco_asa_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Connection Denied', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'Teardown TCP connection'}
+    message_dict = {'name': 'Connection Denied', 'src_ip': fake.ipv4_public(), 'dst_ip': fake.ipv4_private(), 'message': 'Teardown TCP connection'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Cisco", "ASA", 5, 106023, message_dict, fmt)
+    return format_log_line("Cisco", "ASA", 5, 106023, message_dict, fmt)
 
   
 
@@ -1740,69 +1740,69 @@ def gen_zscaler_zpa_audit_log(fmt='leef', **kwargs):
 def gen_zscaler_log(fmt='cef', **kwargs):
     """Legacy Zscaler log generator - delegates to Web Proxy for backward compatibility."""
     return gen_zscaler_web_log(fmt=fmt, **kwargs)
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Zscaler", "Web Proxy", 8, 4000, message_dict, fmt)
+    return format_log_line("Zscaler", "Web Proxy", 8, 4000, message_dict, fmt)
 
   
 
 def gen_proofpoint_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Malicious URL Clicked', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'User clicked a malicious link in an email'}
+    message_dict = {'name': 'Malicious URL Clicked', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'User clicked a malicious link in an email'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Proofpoint", "Email Security", 9, 5000, message_dict, fmt)
+    return format_log_line("Proofpoint", "Email Security", 9, 5000, message_dict, fmt)
 
   
 
 def gen_mde_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'LSASS Memory Access', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'Suspicious process accessed LSASS memory'}
+    message_dict = {'name': 'LSASS Memory Access', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'Suspicious process accessed LSASS memory'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Microsoft", "Defender for Endpoint", 10, 6000, message_dict, fmt)
+    return format_log_line("Microsoft", "Defender for Endpoint", 10, 6000, message_dict, fmt)
 
   
 
 def gen_crowdstrike_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Process Spawning from Office App', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'winword.exe spawned powershell.exe'}
+    message_dict = {'name': 'Process Spawning from Office App', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'winword.exe spawned powershell.exe'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("CrowdStrike", "Falcon", 8, 7000, message_dict, fmt)
+    return format_log_line("CrowdStrike", "Falcon", 8, 7000, message_dict, fmt)
 
   
 
 def gen_sentinelone_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Ransomware Behavior Detected', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'A process is rapidly encrypting files'}
+    message_dict = {'name': 'Ransomware Behavior Detected', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'A process is rapidly encrypting files'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("SentinelOne", "EDR", 10, 8000, message_dict, fmt)
+    return format_log_line("SentinelOne", "EDR", 10, 8000, message_dict, fmt)
 
   
 
 def gen_dropbox_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'file.download', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'User downloaded a file from Dropbox'}
+    message_dict = {'name': 'file.download', 'username': fake.user_name(), 'src_ip': fake.ipv4_public(), 'message': 'User downloaded a file from Dropbox'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Dropbox", "Events", 3, 17000, message_dict, fmt)
+    return format_log_line("Dropbox", "Events", 3, 17000, message_dict, fmt)
 
   
 
 def gen_windows_event_collector_log(fmt='cef', **kwargs):
 
-    message_dict = {'name': 'Forwarded Event', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'An event was forwarded by the collector'}
+    message_dict = {'name': 'Forwarded Event', 'username': fake.user_name(), 'src_ip': fake.ipv4_private(), 'message': 'An event was forwarded by the collector'}
 
-    message_dict.update(kwargs)
+    message_dict.update(kwargs)
 
-    return format_log_line("Windows", "Event Collector", 2, 18000, message_dict, fmt)
+    return format_log_line("Windows", "Event Collector", 2, 18000, message_dict, fmt)
 
   
 
@@ -1812,325 +1812,325 @@ def gen_windows_event_collector_log(fmt='cef', **kwargs):
 
 def send_log(log_function, sock, csv_writer, dest_ip, dest_port, fmt='cef', **kwargs):
 
-    """Helper function to generate, send, and queue a single log."""
+    """Helper function to generate, send, and queue a single log."""
 
-    if session_state['stop_event'].is_set(): return
+    if session_state['stop_event'].is_set(): return
 
-    log_dict = log_function(fmt=fmt, **kwargs)
+    log_dict = log_function(fmt=fmt, **kwargs)
 
-    log_line = log_dict['log_line']
+    log_line = log_dict['log_line']
 
-    try:
+    try:
 
-        socket.inet_aton(dest_ip)
+        socket.inet_aton(dest_ip)
 
-        resolved_ip = dest_ip
+        resolved_ip = dest_ip
 
-    except socket.error:
+    except socket.error:
 
-        try:
+        try:
 
-            resolved_ip = socket.gethostbyname(dest_ip)
+            resolved_ip = socket.gethostbyname(dest_ip)
 
-        except socket.gaierror:
+        except socket.gaierror:
 
-            raise ConnectionError(f"Could not resolve hostname: {dest_ip}")
+            raise ConnectionError(f"Could not resolve hostname: {dest_ip}")
 
   
 
-    sock.sendto(log_line.encode('utf-8'), (resolved_ip, dest_port))
+    sock.sendto(log_line.encode('utf-8'), (resolved_ip, dest_port))
 
-    if csv_writer: csv_writer.writerow(log_dict)
+    if csv_writer: csv_writer.writerow(log_dict)
 
-    with session_lock:
+    with session_lock:
 
-        session_state['logs_queue'].append(f'data: {json.dumps({"log": log_line})}\n\n')
+        session_state['logs_queue'].append(f'data: {json.dumps({"log": log_line})}\n\n')
 
-    # Use a shorter, more controlled sleep for noise generation
+    # Use a shorter, more controlled sleep for noise generation
 
-    if kwargs.get('is_noise'):
+    if kwargs.get('is_noise'):
 
-        time.sleep(random.uniform(0.1, 0.5))
+        time.sleep(random.uniform(0.1, 0.5))
 
-    else:
+    else:
 
-        time.sleep(random.uniform(0.5, 2.0))
+        time.sleep(random.uniform(0.5, 2.0))
 
   
 
 def rogue_insider_story(config, sock, csv_writer):
 
-    """Generates logs for a rogue insider scenario."""
+    """Generates logs for a rogue insider scenario."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    insider_username = fake.user_name()
+    insider_username = fake.user_name()
 
-    insider_ip = fake.ipv4_private()
-
-  
-
-    send_log(gen_okta_audit_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=insider_username, 
-
-             message=f'User {insider_username} added to "Domain Admins" group')
+    insider_ip = fake.ipv4_private()
 
   
 
-    sensitive_files = ["Q4_Financial_Forecast.xlsx", "Project_Phoenix_Roadmap.pdf", "employee_salary_data_2025.csv"]
+    send_log(gen_okta_audit_log, sock, csv_writer, dest_ip, dest_port,
 
-    for fname in sensitive_files:
+             username=insider_username, 
 
-        send_log(gen_dropbox_log, sock, csv_writer, dest_ip, dest_port,
-
-                 username=insider_username, 
-
-                 src_ip=insider_ip,
-
-                 message=f'User {insider_username} downloaded file "{fname}"')
+             message=f'User {insider_username} added to "Domain Admins" group')
 
   
 
-    send_log(gen_proofpoint_log, sock, csv_writer, dest_ip, dest_port,
+    sensitive_files = ["Q4_Financial_Forecast.xlsx", "Project_Phoenix_Roadmap.pdf", "employee_salary_data_2025.csv"]
 
-             username=insider_username,
+    for fname in sensitive_files:
 
-             src_ip=insider_ip,
+        send_log(gen_dropbox_log, sock, csv_writer, dest_ip, dest_port,
 
-             message=f'Outbound email to personal address with large attachment detected from {insider_username}')
+                 username=insider_username, 
 
-    send_log(gen_google_workspace_audit_log, sock, csv_writer, dest_ip, dest_port,
+                 src_ip=insider_ip,
 
-             username=insider_username,
+                 message=f'User {insider_username} downloaded file "{fname}"')
 
-             name='drive.delete',
+  
 
-             message=f'User {insider_username} deleted an item from Google Drive audit log')
+    send_log(gen_proofpoint_log, sock, csv_writer, dest_ip, dest_port,
+
+             username=insider_username,
+
+             src_ip=insider_ip,
+
+             message=f'Outbound email to personal address with large attachment detected from {insider_username}')
+
+    send_log(gen_google_workspace_audit_log, sock, csv_writer, dest_ip, dest_port,
+
+             username=insider_username,
+
+             name='drive.delete',
+
+             message=f'User {insider_username} deleted an item from Google Drive audit log')
 
   
 
 def web_server_breach_story(config, sock, csv_writer):
 
-    """Generates logs for a web server breach scenario."""
+    """Generates logs for a web server breach scenario."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    attacker_ip = fake.ipv4_public()
+    attacker_ip = fake.ipv4_public()
 
-    web_server_ip = fake.ipv4_private()
-
-  
-
-    send_log(gen_panos_log, sock, csv_writer, dest_ip, dest_port,
-
-             src_ip=attacker_ip, dst_ip=web_server_ip,
-
-             message='SQL Injection attempt detected against web server')
-
-    send_log(gen_crowdstrike_log, sock, csv_writer, dest_ip, dest_port,
-
-             src_ip=web_server_ip,
-
-             message=f'Web server process (w3wp.exe) spawned cmd.exe')
+    web_server_ip = fake.ipv4_private()
 
   
 
-    send_log(gen_mde_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_panos_log, sock, csv_writer, dest_ip, dest_port,
 
-             src_ip=web_server_ip,
+             src_ip=attacker_ip, dst_ip=web_server_ip,
 
-             message='LSASS memory accessed by suspicious process originating from web server')
+             message='SQL Injection attempt detected against web server')
+
+    send_log(gen_crowdstrike_log, sock, csv_writer, dest_ip, dest_port,
+
+             src_ip=web_server_ip,
+
+             message=f'Web server process (w3wp.exe) spawned cmd.exe')
 
   
 
-    send_log(gen_zscaler_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_mde_log, sock, csv_writer, dest_ip, dest_port,
 
-             src_ip=web_server_ip, dst_ip=random.choice(KNOWN_BAD_IPS),
+             src_ip=web_server_ip,
 
-             message='C2 Beaconing detected from web server')
+             message='LSASS memory accessed by suspicious process originating from web server')
+
+  
+
+    send_log(gen_zscaler_log, sock, csv_writer, dest_ip, dest_port,
+
+             src_ip=web_server_ip, dst_ip=random.choice(KNOWN_BAD_IPS),
+
+             message='C2 Beaconing detected from web server')
 
   
 
 def brute_force_data_theft_story(config, sock, csv_writer):
 
-    """Generates logs for a brute-force and data theft scenario."""
+    """Generates logs for a brute-force and data theft scenario."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    attacker_ip = fake.ipv4_public()
+    attacker_ip = fake.ipv4_public()
 
-    target_user = fake.user_name()
-
-  
-
-    for _ in range(10): # Simulate multiple failed logins
-
-        send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port,
-
-                 username=target_user, src_ip=attacker_ip,
-
-                 name='UserLoginFailed', message='Failed user sign-in attempt')
+    target_user = fake.user_name()
 
   
 
-    send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port,
+    for _ in range(10): # Simulate multiple failed logins
 
-             username=target_user, src_ip=attacker_ip,
+        send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port,
 
-             message='Successful user sign-in')
+                 username=target_user, src_ip=attacker_ip,
 
-  
-
-    send_log(gen_m365_email_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=target_user,
-
-             message='Email forwarding rule created to external address')
+                 name='UserLoginFailed', message='Failed user sign-in attempt')
 
   
 
-    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port,
 
-             username=target_user, src_ip=attacker_ip,
+             username=target_user, src_ip=attacker_ip,
 
-             message='storage.buckets.update IAM policy changed to public')
+             message='Successful user sign-in')
+
+  
+
+    send_log(gen_m365_email_log, sock, csv_writer, dest_ip, dest_port,
+
+             username=target_user,
+
+             message='Email forwarding rule created to external address')
+
+  
+
+    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port,
+
+             username=target_user, src_ip=attacker_ip,
+
+             message='storage.buckets.update IAM policy changed to public')
 
   
 
 def aws_compromise_story(config, sock, csv_writer):
 
-    """Generates logs for an AWS compromise scenario."""
+    """Generates logs for an AWS compromise scenario."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    attacker_ip = fake.ipv4_public()
+    attacker_ip = fake.ipv4_public()
 
-    compromised_user = fake.user_name()
-
-  
-
-    send_log(gen_aws_cloudtrail_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=compromised_user, src_ip=attacker_ip,
-
-             message=f'Successful AWS Console login for user {compromised_user} from unusual IP')
+    compromised_user = fake.user_name()
 
   
 
-    send_log(gen_aws_cloudtrail_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_aws_cloudtrail_log, sock, csv_writer, dest_ip, dest_port,
 
-             username=compromised_user, src_ip=attacker_ip, name='CreateUser',
+             username=compromised_user, src_ip=attacker_ip,
 
-             message='New IAM user "backdoor_user" created')
-
-  
-
-    send_log(gen_aws_cloudtrail_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=compromised_user, src_ip=attacker_ip, name='AttachUserPolicy',
-
-             message='AdministratorAccess policy attached to user "backdoor_user"')
+             message=f'Successful AWS Console login for user {compromised_user} from unusual IP')
 
   
 
-    send_log(gen_aws_vpc_flow_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_aws_cloudtrail_log, sock, csv_writer, dest_ip, dest_port,
 
-             src_ip=fake.ipv4_private(), dst_ip=random.choice(KNOWN_BAD_IPS),
+             username=compromised_user, src_ip=attacker_ip, name='CreateUser',
 
-             message='Large volume of data egress observed from internal instance to known malicious IP')
+             message='New IAM user "backdoor_user" created')
+
+  
+
+    send_log(gen_aws_cloudtrail_log, sock, csv_writer, dest_ip, dest_port,
+
+             username=compromised_user, src_ip=attacker_ip, name='AttachUserPolicy',
+
+             message='AdministratorAccess policy attached to user "backdoor_user"')
+
+  
+
+    send_log(gen_aws_vpc_flow_log, sock, csv_writer, dest_ip, dest_port,
+
+             src_ip=fake.ipv4_private(), dst_ip=random.choice(KNOWN_BAD_IPS),
+
+             message='Large volume of data egress observed from internal instance to known malicious IP')
 
   
 
 def gcp_compromise_story(config, sock, csv_writer):
 
-    """Generates logs for a GCP compromise scenario."""
+    """Generates logs for a GCP compromise scenario."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    attacker_ip = fake.ipv4_public()
+    attacker_ip = fake.ipv4_public()
 
-    compromised_sa = f"compromised-sa@{fake.word()}.iam.gserviceaccount.com"
-
-  
-
-    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=attacker_ip, name='v1.iam.serviceAccounts.keys.create',
-
-             message=f'New service account key created for {compromised_sa}')
+    compromised_sa = f"compromised-sa@{fake.word()}.iam.gserviceaccount.com"
 
   
 
-    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port,
 
-             username=compromised_sa, src_ip=attacker_ip, name='v1.storage.buckets.update',
+             username=attacker_ip, name='v1.iam.serviceAccounts.keys.create',
 
-             message='IAM policy on sensitive-data-bucket changed to public')
+             message=f'New service account key created for {compromised_sa}')
 
   
 
-    send_log(gen_gcp_flow_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port,
 
-             src_ip=fake.ipv4_private(), dst_ip=attacker_ip,
+             username=compromised_sa, src_ip=attacker_ip, name='v1.storage.buckets.update',
 
-             message='Anomalous data transfer from internal GCS bucket to external IP')
+             message='IAM policy on sensitive-data-bucket changed to public')
+
+  
+
+    send_log(gen_gcp_flow_log, sock, csv_writer, dest_ip, dest_port,
+
+             src_ip=fake.ipv4_private(), dst_ip=attacker_ip,
+
+             message='Anomalous data transfer from internal GCS bucket to external IP')
 
   
 
 def azure_compromise_story(config, sock, csv_writer):
 
-    """Generates logs for an Azure compromise scenario."""
+    """Generates logs for an Azure compromise scenario."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    attacker_ip = fake.ipv4_public()
+    attacker_ip = fake.ipv4_public()
 
-    target_user = fake.user_name()
-
-  
-
-    send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=target_user, src_ip=attacker_ip,
-
-             message='Successful sign-in from unfamiliar location')
+    target_user = fake.user_name()
 
   
 
-    send_log(gen_azure_ad_audit_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port,
 
-             username=target_user, name='Add owner to application',
+             username=target_user, src_ip=attacker_ip,
 
-             message='Owner added to a high-privilege enterprise application')
-
-  
-
-    send_log(gen_azure_audit_log, sock, csv_writer, dest_ip, dest_port,
-
-             username=target_user, src_ip=attacker_ip, name='Microsoft.Storage/storageAccounts/listkeys/action',
-
-             message='Storage account keys listed for production_data_storage')
+             message='Successful sign-in from unfamiliar location')
 
   
 
-    send_log(gen_azure_flow_log, sock, csv_writer, dest_ip, dest_port,
+    send_log(gen_azure_ad_audit_log, sock, csv_writer, dest_ip, dest_port,
 
-             src_ip=fake.ipv4_private(), dst_ip=random.choice(KNOWN_BAD_IPS),
+             username=target_user, name='Add owner to application',
 
-             message='High-volume data egress from Azure storage to known malicious IP')
+             message='Owner added to a high-privilege enterprise application')
+
+  
+
+    send_log(gen_azure_audit_log, sock, csv_writer, dest_ip, dest_port,
+
+             username=target_user, src_ip=attacker_ip, name='Microsoft.Storage/storageAccounts/listkeys/action',
+
+             message='Storage account keys listed for production_data_storage')
+
+  
+
+    send_log(gen_azure_flow_log, sock, csv_writer, dest_ip, dest_port,
+
+             src_ip=fake.ipv4_private(), dst_ip=random.choice(KNOWN_BAD_IPS),
+
+             message='High-volume data egress from Azure storage to known malicious IP')
 
   
 
@@ -2138,141 +2138,141 @@ def azure_compromise_story(config, sock, csv_writer):
 
 def reconnaissance_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_panos_log, sock, csv_writer, dest_ip, dest_port, src_ip=fake.ipv4_public(), dst_ip=fake.ipv4_public(), message='Network port scan detected from external source')
+    send_log(gen_panos_log, sock, csv_writer, dest_ip, dest_port, src_ip=fake.ipv4_public(), dst_ip=fake.ipv4_public(), message='Network port scan detected from external source')
 
   
 
 def resource_development_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port, username='suspicious_user', message='New VM instance created with public IP')
+    send_log(gen_gcp_audit_log, sock, csv_writer, dest_ip, dest_port, username='suspicious_user', message='New VM instance created with public IP')
 
   
 
 def initial_access_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_proofpoint_log, sock, csv_writer, dest_ip, dest_port, message=f'User clicked a malicious link in a phishing email to {random.choice(KNOWN_BAD_URLS)}')
+    send_log(gen_proofpoint_log, sock, csv_writer, dest_ip, dest_port, message=f'User clicked a malicious link in a phishing email to {random.choice(KNOWN_BAD_URLS)}')
 
   
 
 def execution_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_crowdstrike_log, sock, csv_writer, dest_ip, dest_port, message='powershell.exe executed with encoded command')
+    send_log(gen_crowdstrike_log, sock, csv_writer, dest_ip, dest_port, message='powershell.exe executed with encoded command')
 
   
 
 def persistence_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_azure_ad_audit_log, sock, csv_writer, dest_ip, dest_port, message='New user account created and added to Global Administrators')
+    send_log(gen_azure_ad_audit_log, sock, csv_writer, dest_ip, dest_port, message='New user account created and added to Global Administrators')
 
   
 
 def privilege_escalation_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_okta_audit_log, sock, csv_writer, dest_ip, dest_port, message='User privilege escalated to Super Admin')
+    send_log(gen_okta_audit_log, sock, csv_writer, dest_ip, dest_port, message='User privilege escalated to Super Admin')
 
   
 
 def defense_evasion_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_windows_event_collector_log, sock, csv_writer, dest_ip, dest_port, name='System Event Log Cleared', message='The system event log was cleared by an administrator')
+    send_log(gen_windows_event_collector_log, sock, csv_writer, dest_ip, dest_port, name='System Event Log Cleared', message='The system event log was cleared by an administrator')
 
   
 
 def credential_access_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_mde_log, sock, csv_writer, dest_ip, dest_port)
+    send_log(gen_mde_log, sock, csv_writer, dest_ip, dest_port)
 
   
 
 def discovery_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_windows_event_collector_log, sock, csv_writer, dest_ip, dest_port, name='Network Discovery Command', message='Command executed: netstat -an')
+    send_log(gen_windows_event_collector_log, sock, csv_writer, dest_ip, dest_port, name='Network Discovery Command', message='Command executed: netstat -an')
 
   
 
 def lateral_movement_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port, src_ip=fake.ipv4_private(), message='Successful remote login to another host on the network')
+    send_log(gen_azure_signin_log, sock, csv_writer, dest_ip, dest_port, src_ip=fake.ipv4_private(), message='Successful remote login to another host on the network')
 
   
 
 def collection_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_dropbox_log, sock, csv_writer, dest_ip, dest_port, message='Large number of files downloaded from multiple folders')
+    send_log(gen_dropbox_log, sock, csv_writer, dest_ip, dest_port, message='Large number of files downloaded from multiple folders')
 
   
 
 def command_and_control_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_zscaler_log, sock, csv_writer, dest_ip, dest_port)
+    send_log(gen_zscaler_log, sock, csv_writer, dest_ip, dest_port)
 
   
 
 def exfiltration_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_m365_email_log, sock, csv_writer, dest_ip, dest_port, message='Email sent to external domain with large encrypted attachment')
+    send_log(gen_m365_email_log, sock, csv_writer, dest_ip, dest_port, message='Email sent to external domain with large encrypted attachment')
 
   
 
 def impact_story(config, sock, csv_writer):
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    send_log(gen_sentinelone_log, sock, csv_writer, dest_ip, dest_port)
+    send_log(gen_sentinelone_log, sock, csv_writer, dest_ip, dest_port)
 
   
 
@@ -2280,11 +2280,11 @@ def impact_story(config, sock, csv_writer):
 
 def add_story_noise(config, sock, csv_writer):
 
-    """Adds random, unrelated logs to a story."""
+    """Adds random, unrelated logs to a story."""
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
     noise_generators = [
 
@@ -2296,13 +2296,13 @@ def add_story_noise(config, sock, csv_writer):
 
     ]
 
-    for _ in range(random.randint(50, 100)):
+    for _ in range(random.randint(50, 100)):
 
-        if session_state['stop_event'].is_set(): break
+        if session_state['stop_event'].is_set(): break
 
-        log_function = random.choice(noise_generators)
+        log_function = random.choice(noise_generators)
 
-        send_log(log_function, sock, csv_writer, dest_ip, dest_port, is_noise=True)
+        send_log(log_function, sock, csv_writer, dest_ip, dest_port, is_noise=True)
 
   
   
@@ -2311,255 +2311,255 @@ def add_story_noise(config, sock, csv_writer):
 
 def generate_logs_session(config):
 
-    send_mode = config.get('send_mode', 'random')
+    send_mode = config.get('send_mode', 'random')
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    fmt = config.get('log_format', 'cef')
+    fmt = config.get('log_format', 'cef')
 
-    if send_mode == 'story': fmt = 'cef'
+    if send_mode == 'story': fmt = 'cef'
 
-    save_file = config.get('save_file', False)
+    save_file = config.get('save_file', False)
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-    fhandle, csv_writer = None, None
+    fhandle, csv_writer = None, None
 
-    if save_file:
+    if save_file:
 
-        os.makedirs(LOG_DIR, exist_ok=True)
+        os.makedirs(LOG_DIR, exist_ok=True)
 
-        filename = f"syslog_{datetime.now().strftime('%Y%m%d_%H%M%S')}.{fmt}.csv"
+        filename = f"syslog_{datetime.now().strftime('%Y%m%d_%H%M%S')}.{fmt}.csv"
 
-        file_path = os.path.join(LOG_DIR, filename)
+        file_path = os.path.join(LOG_DIR, filename)
 
-        fhandle = open(file_path, 'w', newline='', encoding='utf-8')
+        fhandle = open(file_path, 'w', newline='', encoding='utf-8')
 
-        fieldnames = ['timestamp', 'vendor', 'product', 'severity', 'event_id', 'name', 'username', 'src_ip', 'dst_ip', 'message', 'log_line']
+        fieldnames = ['timestamp', 'vendor', 'product', 'severity', 'event_id', 'name', 'username', 'src_ip', 'dst_ip', 'message', 'log_line']
 
-        csv_writer = csv.DictWriter(fhandle, fieldnames=fieldnames, extrasaction='ignore')
+        csv_writer = csv.DictWriter(fhandle, fieldnames=fieldnames, extrasaction='ignore')
 
-        csv_writer.writeheader()
-
-  
-
-    try:
-
-        if send_mode == 'random':
-
-            run_randomization_session(config, sock, csv_writer)
-
-        elif send_mode == 'story':
-
-            run_story_session(config, sock, csv_writer)
-
-        with session_lock:
-
-             if not session_state['stop_event'].is_set():
-
-                session_state['logs_queue'].append(f'data: {json.dumps({"status": "Session completed.", "type": "success", "is_running": False, "is_paused": False})}\n\n')
+        csv_writer.writeheader()
 
   
 
-    except Exception as e:
+    try:
 
-        print(f"Error in generator thread: {e}")
+        if send_mode == 'random':
 
-        with session_lock:
+            run_randomization_session(config, sock, csv_writer)
 
-            error_message = f"Error in generator: {e}"
+        elif send_mode == 'story':
 
-            session_state['logs_queue'].append(f'data: {json.dumps({"status": error_message, "type": "danger", "is_running": False, "is_paused": False})}\n\n')
+            run_story_session(config, sock, csv_writer)
 
-    finally:
+        with session_lock:
 
-        sock.close()
+             if not session_state['stop_event'].is_set():
 
-        if fhandle: fhandle.close()
+                session_state['logs_queue'].append(f'data: {json.dumps({"status": "Session completed.", "type": "success", "is_running": False, "is_paused": False})}\n\n')
 
-        with session_lock:
+  
 
-            session_state['is_running'] = False
+    except Exception as e:
 
-            session_state['is_paused'] = False
+        print(f"Error in generator thread: {e}")
 
-            session_state['thread'] = None
+        with session_lock:
+
+            error_message = f"Error in generator: {e}"
+
+            session_state['logs_queue'].append(f'data: {json.dumps({"status": error_message, "type": "danger", "is_running": False, "is_paused": False})}\n\n')
+
+    finally:
+
+        sock.close()
+
+        if fhandle: fhandle.close()
+
+        with session_lock:
+
+            session_state['is_running'] = False
+
+            session_state['is_paused'] = False
+
+            session_state['thread'] = None
 
   
 
 def run_randomization_session(config, sock, csv_writer):
 
-    duration_minutes = int(config.get('duration_minutes', 1))
+    duration_minutes = int(config.get('duration_minutes', 1))
 
-    messages_per_second = int(config.get('messages_per_second', 10))
+    messages_per_second = int(config.get('messages_per_second', 10))
 
-    fmt = config.get('log_format', 'cef')
+    fmt = config.get('log_format', 'cef')
 
-    dest_ip = config.get('dest_ip', '127.0.0.1')
+    dest_ip = config.get('dest_ip', '127.0.0.1')
 
-    dest_port = int(config.get('dest_port', 514))
+    dest_port = int(config.get('dest_port', 514))
 
-    is_custom_mode = 'custom_vendor' in config and config.get('custom_vendor') and 'custom_product' in config and config.get('custom_product')
+    is_custom_mode = 'custom_vendor' in config and config.get('custom_vendor') and 'custom_product' in config and config.get('custom_product')
 
   
 
-    log_generators = {
+    log_generators = {
 
-        "AWS-CloudTrail": gen_aws_cloudtrail_log, "AWS-VPC Flow Logs": gen_aws_vpc_flow_log,
+        "AWS-CloudTrail": gen_aws_cloudtrail_log, "AWS-VPC Flow Logs": gen_aws_vpc_flow_log,
 
-        "Azure-Audit Logs": gen_azure_audit_log, "Azure-Flow Logs": gen_azure_flow_log, "Azure-Signin Log": gen_azure_signin_log,
+        "Azure-Audit Logs": gen_azure_audit_log, "Azure-Flow Logs": gen_azure_flow_log, "Azure-Signin Log": gen_azure_signin_log,
 
-        "Azure-AD Audit Logs": gen_azure_ad_audit_log, "GCP-Audit Logs": gen_gcp_audit_log, "GCP-Flow Logs": gen_gcp_flow_log,
+        "Azure-AD Audit Logs": gen_azure_ad_audit_log, "GCP-Audit Logs": gen_gcp_audit_log, "GCP-Flow Logs": gen_gcp_flow_log,
 
-        "Kubernetes-Audit Logs": gen_kubernetes_audit_log, "Okta-SSO": gen_okta_sso_log, "Okta-Audit": gen_okta_audit_log,
+        "Kubernetes-Audit Logs": gen_kubernetes_audit_log, "Okta-SSO": gen_okta_sso_log, "Okta-Audit": gen_okta_audit_log,
 
-        "Duo-Authentication": gen_duo_log, "PingOne-SSO": gen_pingone_log, "OneLogin-Events": gen_onelogin_log,
+        "Duo-Authentication": gen_duo_log, "PingOne-SSO": gen_pingone_log, "OneLogin-Events": gen_onelogin_log,
 
-        "Google Workspace-Audit": gen_google_workspace_audit_log, "Google Workspace-Authentication": gen_google_workspace_auth_log,
+        "Google Workspace-Audit": gen_google_workspace_audit_log, "Google Workspace-Authentication": gen_google_workspace_auth_log,
 
-        "Microsoft 365-Email Logs": gen_m365_email_log, "Palo Alto Networks-PAN-OS": gen_panos_log, "Cisco-ASA": gen_cisco_asa_log,
+        "Microsoft 365-Email Logs": gen_m365_email_log, "Palo Alto Networks-PAN-OS": gen_panos_log, "Cisco-ASA": gen_cisco_asa_log,
 
         "Zscaler-Web Proxy": gen_zscaler_web_log, "Zscaler-NSS Firewall": gen_zscaler_firewall_log,
         "Zscaler-ZPA User Activity": gen_zscaler_zpa_user_activity_log, "Zscaler-ZPA User Status": gen_zscaler_zpa_user_status_log,
         "Zscaler-ZPA Connector": gen_zscaler_zpa_connector_log, "Zscaler-ZPA Audit": gen_zscaler_zpa_audit_log,
         "Proofpoint-Email Security": gen_proofpoint_log,
 
-        "Microsoft-Defender for Endpoint": gen_mde_log, "CrowdStrike-Falcon": gen_crowdstrike_log,
+        "Microsoft-Defender for Endpoint": gen_mde_log, "CrowdStrike-Falcon": gen_crowdstrike_log,
 
-        "SentinelOne-EDR": gen_sentinelone_log, "Dropbox-Events": gen_dropbox_log, "Windows-Event Collector": gen_windows_event_collector_log
+        "SentinelOne-EDR": gen_sentinelone_log, "Dropbox-Events": gen_dropbox_log, "Windows-Event Collector": gen_windows_event_collector_log
 
-    }
+    }
 
-    if not is_custom_mode:
+    if not is_custom_mode:
 
-        selected_products = config.get('products', [])
+        selected_products = config.get('products', [])
 
-        if not selected_products: return
-
-  
-
-    end_time = time.time() + (duration_minutes * 60)
-
-    sleep_interval = 1.0 / messages_per_second
+        if not selected_products: return
 
   
 
-    while time.time() < end_time and not session_state['stop_event'].is_set():
+    end_time = time.time() + (duration_minutes * 60)
 
-        if session_state['pause_event'].is_set():
-
-            time.sleep(0.5)
-
-            continue
+    sleep_interval = 1.0 / messages_per_second
 
   
 
-        if is_custom_mode:
+    while time.time() < end_time and not session_state['stop_event'].is_set():
 
-            send_log(gen_custom_log, sock, csv_writer, dest_ip, dest_port, fmt=fmt, 
+        if session_state['pause_event'].is_set():
 
-                     custom_vendor=config['custom_vendor'], 
+            time.sleep(0.5)
 
-                     custom_product=config['custom_product'])
+            continue
 
-        else:
+  
 
-            product_to_gen = random.choice(selected_products)
+        if is_custom_mode:
 
-            log_function = log_generators.get(product_to_gen)
+            send_log(gen_custom_log, sock, csv_writer, dest_ip, dest_port, fmt=fmt, 
 
-            if log_function:
+                     custom_vendor=config['custom_vendor'], 
 
-                send_log(log_function, sock, csv_writer, dest_ip, dest_port, fmt=fmt)
+                     custom_product=config['custom_product'])
 
-        time.sleep(sleep_interval)
+        else:
+
+            product_to_gen = random.choice(selected_products)
+
+            log_function = log_generators.get(product_to_gen)
+
+            if log_function:
+
+                send_log(log_function, sock, csv_writer, dest_ip, dest_port, fmt=fmt)
+
+        time.sleep(sleep_interval)
 
   
   
 
 def run_story_session(config, sock, csv_writer):
 
-    story_type = config.get('story_type')
+    story_type = config.get('story_type')
 
-    add_noise = config.get('add_noise')
+    add_noise = config.get('add_noise')
 
-    story_functions = {
+    story_functions = {
 
-        'rogue_insider_story': rogue_insider_story,
+        'rogue_insider_story': rogue_insider_story,
 
-        'web_server_breach_story': web_server_breach_story,
+        'web_server_breach_story': web_server_breach_story,
 
-        'brute_force_data_theft_story': brute_force_data_theft_story,
+        'brute_force_data_theft_story': brute_force_data_theft_story,
 
-        'aws_compromise_story': aws_compromise_story,
+        'aws_compromise_story': aws_compromise_story,
 
-        'gcp_compromise_story': gcp_compromise_story,
+        'gcp_compromise_story': gcp_compromise_story,
 
-        'azure_compromise_story': azure_compromise_story,
+        'azure_compromise_story': azure_compromise_story,
 
-        'reconnaissance_story': reconnaissance_story,
+        'reconnaissance_story': reconnaissance_story,
 
-        'resource_development_story': resource_development_story,
+        'resource_development_story': resource_development_story,
 
-        'initial_access_story': initial_access_story,
+        'initial_access_story': initial_access_story,
 
-        'execution_story': execution_story,
+        'execution_story': execution_story,
 
-        'persistence_story': persistence_story,
+        'persistence_story': persistence_story,
 
-        'privilege_escalation_story': privilege_escalation_story,
+        'privilege_escalation_story': privilege_escalation_story,
 
-        'defense_evasion_story': defense_evasion_story,
+        'defense_evasion_story': defense_evasion_story,
 
-        'credential_access_story': credential_access_story,
+        'credential_access_story': credential_access_story,
 
-        'discovery_story': discovery_story,
+        'discovery_story': discovery_story,
 
-        'lateral_movement_story': lateral_movement_story,
+        'lateral_movement_story': lateral_movement_story,
 
-        'collection_story': collection_story,
+        'collection_story': collection_story,
 
-        'command_and_control_story': command_and_control_story,
+        'command_and_control_story': command_and_control_story,
 
-        'exfiltration_story': exfiltration_story,
+        'exfiltration_story': exfiltration_story,
 
-        'impact_story': impact_story,
+        'impact_story': impact_story,
 
-    }
-
-  
-
-    story_func = story_functions.get(story_type)
-
-    if story_func:
-
-        if add_noise:
-
-            noise_thread = threading.Thread(target=add_story_noise, args=(config, sock, csv_writer))
-
-            noise_thread.daemon = True
-
-            noise_thread.start()
-
-        story_func(config, sock, csv_writer)
+    }
 
   
 
-        if add_noise:
+    story_func = story_functions.get(story_type)
 
-            noise_thread.join()
+    if story_func:
 
-    else:
+        if add_noise:
 
-        message = f"Story '{story_type}' is not yet implemented. Stopping session."
+            noise_thread = threading.Thread(target=add_story_noise, args=(config, sock, csv_writer))
 
-        with session_lock:
+            noise_thread.daemon = True
 
-            session_state['logs_queue'].append(f'data: {json.dumps({"status": message, "type": "warning", "is_running": False, "is_paused": False})}\n\n')
+            noise_thread.start()
 
-        time.sleep(1)
+        story_func(config, sock, csv_writer)
+
+  
+
+        if add_noise:
+
+            noise_thread.join()
+
+    else:
+
+        message = f"Story '{story_type}' is not yet implemented. Stopping session."
+
+        with session_lock:
+
+            session_state['logs_queue'].append(f'data: {json.dumps({"status": message, "type": "warning", "is_running": False, "is_paused": False})}\n\n')
+
+        time.sleep(1)
 
   
   
@@ -2570,7 +2570,7 @@ def run_story_session(config, sock, csv_writer):
 
 def index():
 
-    return render_template_string(HTML)
+    return render_template_string(HTML)
 
   
 
@@ -2712,23 +2712,23 @@ def stop_generation():
 
 def status():
 
-    with session_lock:
+    with session_lock:
 
-        message = "Session is running." if session_state['is_running'] else "No active session."
+        message = "Session is running." if session_state['is_running'] else "No active session."
 
-        if session_state['is_running'] and session_state['is_paused']:
+        if session_state['is_running'] and session_state['is_paused']:
 
-            message = "Session is paused."
+            message = "Session is paused."
 
-        return jsonify({
+        return jsonify({
 
-            'is_running': session_state['is_running'],
+            'is_running': session_state['is_running'],
 
-            'is_paused': session_state['is_paused'],
+            'is_paused': session_state['is_paused'],
 
-            'message': message
+            'message': message
 
-        })
+        })
 
   
 
@@ -2736,36 +2736,36 @@ def status():
 
 def stream():
 
-    def event_stream():
+    def event_stream():
 
-        last_sent_index = 0
+        last_sent_index = 0
 
-        while True:
+        while True:
 
-            with session_lock:
+            with session_lock:
 
-                if not session_state['is_running'] and last_sent_index >= len(session_state['logs_queue']):
+                if not session_state['is_running'] and last_sent_index >= len(session_state['logs_queue']):
 
-                    break
+                    break
 
-                queue_len = len(session_state['logs_queue'])
+                queue_len = len(session_state['logs_queue'])
 
-                if last_sent_index < queue_len:
+                if last_sent_index < queue_len:
 
-                    for i in range(last_sent_index, queue_len):
+                    for i in range(last_sent_index, queue_len):
 
-                        yield session_state['logs_queue'][i]
+                        yield session_state['logs_queue'][i]
 
-                    last_sent_index = queue_len
+                    last_sent_index = queue_len
 
-            time.sleep(0.1)
+            time.sleep(0.1)
 
-    return Response(event_stream(), mimetype='text/event-stream')
+    return Response(event_stream(), mimetype='text/event-stream')
 
   
 
 if __name__ == '__main__':
 
-    app.run(debug=True, threaded=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, threaded=True, host='0.0.0.0', port=5001)
 
   
