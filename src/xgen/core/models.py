@@ -7,10 +7,10 @@ aligned with the NICE Cybersecurity Workforce Framework categories and MITRE ATT
 
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Dict, List, Optional, Any, Union
+from typing import Dict, List, Optional, Any, Union, Literal
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, Field, validator, root_validator
+from pydantic import BaseModel, Field, validator, field_validator, model_validator
 
 
 class NICECategory(str, Enum):
@@ -322,7 +322,7 @@ class BaseEvent(BaseModel):
 
 class NetworkEvent(BaseEvent):
     """Network-specific event extending BaseEvent."""
-    nice_category: NICECategory = Field(NICECategory.NETWORK, const=True)
+    nice_category: Literal[NICECategory.NETWORK] = NICECategory.NETWORK
     
     # Network-specific fields
     bytes_in: Optional[int] = Field(None, ge=0, description="Bytes received")
@@ -338,7 +338,7 @@ class NetworkEvent(BaseEvent):
 
 class IdentityEvent(BaseEvent):
     """Identity-specific event extending BaseEvent."""
-    nice_category: NICECategory = Field(NICECategory.IDENTITY, const=True)
+    nice_category: Literal[NICECategory.IDENTITY] = NICECategory.IDENTITY
     
     # Identity-specific fields
     auth_method: Optional[str] = Field(None, description="Authentication method")
@@ -352,8 +352,8 @@ class IdentityEvent(BaseEvent):
 
 
 class CloudEvent(BaseEvent):
-    """Cloud-specific event extending BaseEvent.""" 
-    nice_category: NICECategory = Field(NICECategory.CLOUD, const=True)
+    """Cloud-specific event extending BaseEvent."""
+    nice_category: Literal[NICECategory.CLOUD] = NICECategory.CLOUD
     
     # Cloud-specific fields
     cloud_provider: Optional[str] = Field(None, description="Cloud provider name")
@@ -370,7 +370,7 @@ class CloudEvent(BaseEvent):
 
 class EndpointEvent(BaseEvent):
     """Endpoint-specific event extending BaseEvent."""
-    nice_category: NICECategory = Field(NICECategory.ENDPOINT, const=True)
+    nice_category: Literal[NICECategory.ENDPOINT] = NICECategory.ENDPOINT
     
     # Endpoint-specific fields
     process_name: Optional[str] = Field(None, description="Process name")
@@ -482,14 +482,12 @@ class GenerationConfig(BaseModel):
     syslog_host: Optional[str] = Field(None, description="Syslog destination host")
     syslog_port: int = Field(514, ge=1, le=65535, description="Syslog destination port")
     
-    @root_validator
-    def validate_duration_or_events(cls, values):
+    @model_validator(mode='after')
+    def validate_duration_or_events(self):
         """Either duration_seconds or total_events must be specified."""
-        duration = values.get('duration_seconds')
-        events = values.get('total_events')
-        if not duration and not events:
+        if not self.duration_seconds and not self.total_events:
             raise ValueError("Either duration_seconds or total_events must be specified")
-        return values
+        return self
     
     class Config:
         use_enum_values = True
